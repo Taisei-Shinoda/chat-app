@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct swiftui_chatApp: App {
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             RootView()
         }
+    }
+    
+    init() {
+        FirebaseApp.configure()
     }
 }
