@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct RootView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
-            .font(Font.caption)
-    }
     
+    @State var selectedTab: Tabs = .contacts
+    
+    var body: some View {
+        VStack {
+            Text("Hello, world!")
+                .padding()
+                .font(.chatHeading)
+            
+            Spacer()
+            
+            CustomTabBar(selectedTabs: $selectedTab)
+        }
+    }
     
     /*
      -- フォント検索 --
