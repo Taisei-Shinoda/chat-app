@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
 
 @main
 struct swiftui_chatApp: App {
@@ -18,8 +17,8 @@ struct swiftui_chatApp: App {
             RootView()
         }
     }
-    
-    init() {
-        FirebaseApp.configure()
-    }
+//    
+//    init() {
+//            FirebaseApp.configure()
+//    }
 }

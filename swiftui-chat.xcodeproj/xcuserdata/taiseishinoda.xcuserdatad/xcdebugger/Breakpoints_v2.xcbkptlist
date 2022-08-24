@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "1B0702C1-713E-43CB-9DCF-3FCF25D59290"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D8C12875-C752-4FAD-986F-6448A9BA3009"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "swiftui-chat/ViewModes/AuthViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "D8C12875-C752-4FAD-986F-6448A9BA3009 - 921fe6c6368894bf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "swiftui_chat.AuthViewModel.deinit"
+                  moduleName = "swiftui-chat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taiseishinoda/Desktop/The%20Chat%20App/swiftui-chat/swiftui-chat/ViewModes/AuthViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "D8C12875-C752-4FAD-986F-6448A9BA3009 - 9705bdb87819b60"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "swiftui_chat.AuthViewModel.__deallocating_deinit"
+                  moduleName = "swiftui-chat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taiseishinoda/Desktop/The%20Chat%20App/swiftui-chat/swiftui-chat/ViewModes/AuthViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "D8C12875-C752-4FAD-986F-6448A9BA3009 - e414c837ec78244"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "swiftui_chat.AuthViewModel.__allocating_init() -&gt; swiftui_chat.AuthViewModel"
+                  moduleName = "swiftui-chat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taiseishinoda/Desktop/The%20Chat%20App/swiftui-chat/swiftui-chat/ViewModes/AuthViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "D8C12875-C752-4FAD-986F-6448A9BA3009 - ccee9a9684f7ea10"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "swiftui_chat.AuthViewModel.init() -&gt; swiftui_chat.AuthViewModel"
+                  moduleName = "swiftui-chat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/taiseishinoda/Desktop/The%20Chat%20App/swiftui-chat/swiftui-chat/ViewModes/AuthViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -10,6 +10,7 @@ import SwiftUI
 struct RootView: View {
     
     @State var selectedTab: Tabs = .contacts
+    @State var isOnboarding = !AuthViewModel.isUserLoggedIn()
     
     var body: some View {
         VStack {
@@ -21,6 +22,16 @@ struct RootView: View {
             
             CustomTabBar(selectedTabs: $selectedTab)
         }
+        
+//         指定したブール値へのバインディングがtrueのとき、画面のできるだけ広い範囲をカバーするモーダルビューを提示する。 = 「閉じるまで他のことをさせねーぜ」的な意味
+//
+        .fullScreenCover(isPresented: $isOnboarding) {
+            // on DISMISS
+            
+        } content: {
+            OnboadingContainerView(isOnbording: $isOnboarding)
+        }
+
     }
     
     /*
