@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
+import Combine
 
 struct VerificationView: View {
     
     @Binding var currentStep: OnboardingStep
-    @State var VerificationCode = ""
+    @State var verificationCode = ""
     
     var body: some View {
         
         VStack {
             
             Text("Verification")
+            
                 .font(.titleText)
                 .padding(.top, 52)
             
@@ -31,14 +33,18 @@ struct VerificationView: View {
                     .foregroundColor(Color("input"))
                 
                 HStack {
-                    TextField("", text: $VerificationCode)
+                    TextField("", text: $verificationCode)
                         .font(.bodyParagraph)
+                        .keyboardType(.numberPad)
+                        .onReceive(Just(verificationCode)) { _ in
+                            TextHelper.limitText(&verificationCode, 6)
+                        }
                     
                     
                     Spacer()
                     
                     Button {
-                        VerificationCode = ""
+                        verificationCode = ""
                     } label: {
                         Image(systemName: "multiply.circle.fill")
                     }
@@ -52,7 +58,14 @@ struct VerificationView: View {
             Spacer()
             
             Button {
-                currentStep = .profile
+                AuthViewModel.verifyCode(code: verificationCode) { error in
+                    if error == nil {
+                        currentStep = .profile
+                    } else {
+                        // TODO: エラーメッセージを表示
+                        
+                    }
+                }
             } label: {
                 Text("Next")
             }

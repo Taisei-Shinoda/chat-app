@@ -34,7 +34,8 @@ struct CustomTabBar: View {
             
             
             Button {
-                
+                // TODO: ログアウト
+                AuthViewModel.logout()
             } label: {
                 
                 VStack (alignment: .center, spacing: 4) {
