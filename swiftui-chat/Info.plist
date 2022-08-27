@@ -19,5 +19,7 @@
 		<string>LexendDeca-Regular.ttf</string>
 		<string>LexendDeca-SemiBold.ttf</string>
 	</array>
+	<key>NSContactsUsageDescription</key>
+	<string>あなたの連絡先を同期します</string>
 </dict>
 </plist>

@@ -24,7 +24,6 @@ struct PhoneNumberView: View {
                 .font(.bodyParagraph)
                 .padding(.top, 12)
             
-            // textFIeld
             ZStack {
                 Rectangle()
                     .frame(height: 52)

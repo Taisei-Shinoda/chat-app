@@ -22,16 +22,14 @@ struct RootView: View {
             
             CustomTabBar(selectedTabs: $selectedTab)
         }
-        
-//         指定したブール値へのバインディングがtrueのとき、画面のできるだけ広い範囲をカバーするモーダルビューを提示する。 = 「閉じるまで他のことをさせねーぜ」的な意味
-//
+        /// true の場合、可能な限り画面全体をカバーするモーダル ビューを表示します。
         .fullScreenCover(isPresented: $isOnboarding) {
             // on DISMISS
             
         } content: {
             OnboadingContainerView(isOnbording: $isOnboarding)
         }
-
+        
     }
     
     /*
