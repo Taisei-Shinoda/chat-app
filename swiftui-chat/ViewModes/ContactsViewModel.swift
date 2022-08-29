@@ -27,7 +27,7 @@ class ContactsViewModel: ObservableObject {
                 
                 // TODO: 連絡先で紐付いている友達をアプリで使用できるようにします
                 DatabaseService().getPlatformUsers(localContacts: self.localCotacts) { platformUsers in
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         self.users = platformUsers
                     }
                 }

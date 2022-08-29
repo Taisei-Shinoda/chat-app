@@ -13,14 +13,23 @@ struct RootView: View {
     @State var isOnboarding = !AuthViewModel.isUserLoggedIn()
     
     var body: some View {
-        VStack {
-            Text("Hello, world!")
-                .padding()
-                .font(.chatHeading)
+        ZStack {
+            Color("background")
+                .ignoresSafeArea()
             
-            Spacer()
-            
-            CustomTabBar(selectedTabs: $selectedTab)
+            VStack {
+                
+                switch  selectedTab {
+                case .chats:
+                    ChatsListView()
+                case .contacts:
+                    ContactsListView()
+                }
+                
+                Spacer()
+                
+                CustomTabBar(selectedTabs: $selectedTab)
+            }
         }
         /// true の場合、可能な限り画面全体をカバーするモーダル ビューを表示します。
         .fullScreenCover(isPresented: $isOnboarding) {

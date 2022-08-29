@@ -14,6 +14,7 @@ struct WelcomeView: View {
     var body: some View {
         
         VStack {
+            
             Spacer()
             
             Image("onboarding-welcome")

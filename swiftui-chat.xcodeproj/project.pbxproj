@@ -14,6 +14,8 @@
 		C621741228B5FDDE00AF967E /* SyncContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621741128B5FDDE00AF967E /* SyncContactsView.swift */; };
 		C621741428B61F8700AF967E /* OnboardingButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621741328B61F8700AF967E /* OnboardingButtonStyle.swift */; };
 		C65A852E28B9AB1200088AF3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65A852D28B9AB1200088AF3 /* ImagePicker.swift */; };
+		C65A853228BCA62200088AF3 /* ContactsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65A853128BCA62200088AF3 /* ContactsListView.swift */; };
+		C65A853428BCA63200088AF3 /* ChatsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65A853328BCA63200088AF3 /* ChatsListView.swift */; };
 		C6B5378E28B10CA100C0FDCF /* swiftui_chatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B5378D28B10CA100C0FDCF /* swiftui_chatApp.swift */; };
 		C6B5379028B10CA100C0FDCF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B5378F28B10CA100C0FDCF /* RootView.swift */; };
 		C6B5379228B10CA200C0FDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6B5379128B10CA200C0FDCF /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 		C621741128B5FDDE00AF967E /* SyncContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncContactsView.swift; sourceTree = "<group>"; };
 		C621741328B61F8700AF967E /* OnboardingButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingButtonStyle.swift; sourceTree = "<group>"; };
 		C65A852D28B9AB1200088AF3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C65A853128BCA62200088AF3 /* ContactsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListView.swift; sourceTree = "<group>"; };
+		C65A853328BCA63200088AF3 /* ChatsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsListView.swift; sourceTree = "<group>"; };
 		C6B5378A28B10CA100C0FDCF /* swiftui-chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftui-chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B5378D28B10CA100C0FDCF /* swiftui_chatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftui_chatApp.swift; sourceTree = "<group>"; };
 		C6B5378F28B10CA100C0FDCF /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -86,6 +90,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C65A852F28BCA5D700088AF3 /* Chats View */ = {
+			isa = PBXGroup;
+			children = (
+				C65A853328BCA63200088AF3 /* ChatsListView.swift */,
+			);
+			path = "Chats View";
+			sourceTree = "<group>";
+		};
+		C65A853028BCA5ED00088AF3 /* Contacts View */ = {
+			isa = PBXGroup;
+			children = (
+				C65A853128BCA62200088AF3 /* ContactsListView.swift */,
+			);
+			path = "Contacts View";
+			sourceTree = "<group>";
+		};
 		C6B5378128B10CA100C0FDCF = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +155,8 @@
 			children = (
 				C6B5378F28B10CA100C0FDCF /* RootView.swift */,
 				C6B537C028B5FABE00C0FDCF /* Onboarding */,
+				C65A852F28BCA5D700088AF3 /* Chats View */,
+				C65A853028BCA5ED00088AF3 /* Contacts View */,
 				C6B537AB28B360BA00C0FDCF /* Custom Tab Bar */,
 			);
 			path = Views;
@@ -300,6 +322,7 @@
 				C6B537AD28B360DA00C0FDCF /* CustomTabBar.swift in Sources */,
 				C6B5379028B10CA100C0FDCF /* RootView.swift in Sources */,
 				C6B537BF28B3B80600C0FDCF /* AuthViewModel.swift in Sources */,
+				C65A853428BCA63200088AF3 /* ChatsListView.swift in Sources */,
 				C621740A28B5FD8400AF967E /* WelcomeView.swift in Sources */,
 				C6B537AA28B117BA00C0FDCF /* Fonts.swift in Sources */,
 				C621741028B5FDD000AF967E /* CreateProfileView.swift in Sources */,
@@ -308,6 +331,7 @@
 				C6B537AF28B3695C00C0FDCF /* TabBarButton.swift in Sources */,
 				C621740E28B5FDA700AF967E /* VerificationVIew.swift in Sources */,
 				C6B537C228B5FAF600C0FDCF /* OnboadingContainerView.swift in Sources */,
+				C65A853228BCA62200088AF3 /* ContactsListView.swift in Sources */,
 				C6CF170128B6F08B001C23A7 /* ContactsViewModel.swift in Sources */,
 				C65A852E28B9AB1200088AF3 /* ImagePicker.swift in Sources */,
 				C621741428B61F8700AF967E /* OnboardingButtonStyle.swift in Sources */,
