@@ -21,6 +21,7 @@ struct ContactsListView: View {
                 Spacer()
                 Button {
                     //TODO: 設定
+                    
                 } label: {
                     Image(systemName: "gearshape.fill")
                         .resizable()
@@ -41,14 +42,21 @@ struct ContactsListView: View {
                     .padding()
             }
             .frame(height: 46)
+            .onChange(of: filterText) { _ in
+                contactsViewModel.filterContacts(filterBy: filterText.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))
+            }
             
-            if contactsViewModel.users.count > 0 {
-                List(contactsViewModel.users) { user in
+            if contactsViewModel.filterdUsers.count > 0 {
+                List(contactsViewModel.filterdUsers) { user in
                     
-                    //TODO: 列
-                    Text(user.firstname ?? "Test User")
+                    //TODO: 行
+                    ContanctRow(user: user)
+                        .listRowBackground(Color(.clear))
+                        .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
+                .padding(.top, 12)
+                
             } else {
                 Spacer()
                 

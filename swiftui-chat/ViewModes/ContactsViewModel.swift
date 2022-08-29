@@ -10,7 +10,11 @@ import Contacts
 
 class ContactsViewModel: ObservableObject {
     
-    @Published var users = [User]()
+    private var users = [User]()
+    
+    private var filterText = ""
+    @Published var filterdUsers = [User]()
+    
     private var localCotacts = [CNContact]()
     
     func getLocalContacts() {
@@ -29,6 +33,9 @@ class ContactsViewModel: ObservableObject {
                 DatabaseService().getPlatformUsers(localContacts: self.localCotacts) { platformUsers in
                     DispatchQueue.main.async {
                         self.users = platformUsers
+                        
+                        //TODO: フィルターリスト
+                        self.filterContacts(filterBy: self.filterText)
                     }
                 }
                 
@@ -36,6 +43,25 @@ class ContactsViewModel: ObservableObject {
                 
             }
         }
+    }
+    
+    func filterContacts(filterBy: String) {
+        
+        // パラメータが存在する場合
+        self.filterText = filterBy
+        
+        // テキストが空の場合
+        if filterText == "" {
+            self.filterdUsers = users
+            return
+        }
+        
+        // フィルターをかけます
+        self.filterdUsers = users.filter({ user in
+            user.firstname?.lowercased().contains(filterText) ?? false ||
+            user.lastname?.lowercased().contains(filterText) ?? false ||
+            user.phone?.lowercased().contains(filterText) ?? false
+        })
     }
 }
 

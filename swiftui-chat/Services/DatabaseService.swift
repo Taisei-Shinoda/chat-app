@@ -83,17 +83,34 @@ class DatabaseService {
             
             let uploadTask = fileRef.putData(imageData!, metadata: nil) { meta, error in
                 if error == nil && meta != nil {
-                    doc.setData(["photo" : path], merge: true) { error in
-                        if error == nil {
-                            completion(true)
+                    
+                    // TODO: 画像への完全なURLを取得する
+                    /// ダウンロード URL を非同期に取得します。これは他の人とファイルを共有するために使用できますが、
+                    /// 開発者がFirebase Consoleで取り消せます
+                    fileRef.downloadURL { url, error in
+                        if url != nil && error == nil {
+                            doc.setData(["photo" : url!.absoluteString], merge: true) { error in
+                                if error == nil {
+                                    completion(true)
+                                }
+                            }
+                        }
+                        else {
+                            // 画像のURLを取得できませんでした
+                            completion(false)
                         }
                     }
-                } else {
+                }
+                else {
                     // アップロードできなかった場合
                     completion(false)
                 }
             }
         }
+//        else {
+//            // 画像が選択されませんでした
+//            completion(true)
+//        }
         
         
     }
