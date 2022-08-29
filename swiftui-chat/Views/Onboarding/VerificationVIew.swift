@@ -11,6 +11,8 @@ import Combine
 struct VerificationView: View {
     
     @Binding var currentStep: OnboardingStep
+    @Binding var isOnboarding: Bool
+    
     @State var verificationCode = ""
     
     var body: some View {
@@ -18,7 +20,6 @@ struct VerificationView: View {
         VStack {
             
             Text("Verification")
-            
                 .font(.titleText)
                 .padding(.top, 52)
             
@@ -60,7 +61,13 @@ struct VerificationView: View {
             Button {
                 AuthViewModel.verifyCode(code: verificationCode) { error in
                     if error == nil {
-                        currentStep = .profile
+                        DatabaseService().checkUserProfile { exists in
+                            if exists {
+                                isOnboarding = false
+                            } else {
+                                currentStep = .profile
+                            }
+                        }
                     } else {
                         // TODO: エラーメッセージを表示
                         
@@ -78,6 +85,6 @@ struct VerificationView: View {
 
 struct VerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        VerificationView(currentStep: .constant(.verification))
+        VerificationView(currentStep: .constant(.verification), isOnboarding: .constant(true))
     }
 }

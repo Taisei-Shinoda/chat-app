@@ -16,6 +16,7 @@ class TextHelper {
             .replacingOccurrences(of: ")", with: "")
             .replacingOccurrences(of: "-", with: "")
             .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: "+", with: "")
     }
     
     static func limitText(_ stringvar: inout String, _ limit: Int) {

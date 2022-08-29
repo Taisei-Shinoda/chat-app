@@ -59,13 +59,17 @@ class DatabaseService {
                         completion: @escaping(Bool) -> Void) {
         
         //TODO: ログアウトしたユーザーの再ログイン
+        guard AuthViewModel.isUserLoggedIn() != false else {
+            return
+        }
         
-        
+        let userPhone = TextHelper.sanitizePhoneNumber(AuthViewModel.getLoggedInUserPhone())
         let db = Firestore.firestore()
         
-        let doc = db.collection("users").document()
+        let doc = db.collection("users").document(AuthViewModel.getLoggedInUserId())
         doc.setData(["frstname": firstName,
-                     "lasname": lastName])
+                     "lasname": lastName,
+                     "phone": userPhone])
         
         // 画像のチェック
         if let image = image {
@@ -93,4 +97,27 @@ class DatabaseService {
         
         
     }
+    
+    
+    func checkUserProfile(completion: @escaping (Bool) -> Void) {
+        
+        guard AuthViewModel.isUserLoggedIn() != false else {
+            return
+        }
+        
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(AuthViewModel.getLoggedInUserId()).getDocument { snapShot, error in
+            
+            // TODO: ユーザーのプロファイルデータについて
+            if snapShot != nil && error == nil {
+                completion(snapShot!.exists)
+            } else {
+                // TODO: Result TYPE のアクセス失敗
+                completion(false)
+            }
+        }
+    }
+    
+    
 }
