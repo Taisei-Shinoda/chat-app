@@ -114,8 +114,7 @@ class DatabaseService {
         
         
     }
-    
-    
+
     func checkUserProfile(completion: @escaping (Bool) -> Void) {
         
         guard AuthViewModel.isUserLoggedIn() != false else {
@@ -136,5 +135,55 @@ class DatabaseService {
         }
     }
     
+ // MARK: - チャットメソッド
+    /// ログインしたユーザーが参加している場合、このメソッドは全てのチャットを返します　
+    func getAllChats(completion: @escaping ([Chat]) -> Void) {
+        
+        let db = Firestore.firestore()
+        
+        let chatsQuery = db.collection("chats").whereField("participantids", arrayContains: AuthViewModel.getLoggedInUserId())
+        
+        chatsQuery.getDocuments { snapshot, error in
+            if snapshot != nil && error == nil {
+                var chats = [Chat]()
+                for doc in snapshot!.documents {
+                    let chat = try? doc.data(as: Chat.self)
+                        if let chat = chat {
+                            chats.append(chat)
+                    }
+                }
+                completion(chats)
+            } else {
+                print("データベースの検索でエラーが発生しました")
+            }
+        }
+    }
     
+    
+    /// このメソッドは全てのチャットを戻します
+    func getAllMessages(chat: Chat, completion: @escaping ([ChatMessage]) -> Void) {
+        guard chat.id != nil else {
+            completion([ChatMessage]())
+            return
+        }
+        
+        let db = Firestore.firestore()
+        
+        let msgsQuery = db.collection("chats").document(chat.id!).collection("msgs").order(by: "timestamp")
+        
+        msgsQuery.getDocuments { snapshot, error in
+            if snapshot != nil && error == nil {
+                var messages = [ChatMessage]()
+                for doc in snapshot!.documents {
+                    let msg = try? doc.data(as: ChatMessage.self)
+                    if let msg = msg {
+                        messages.append(msg)
+                    }
+                }
+                completion(messages)
+            } else {
+                print("データベースの検索でエラーが発生しました")
+            }
+        }
+    }
 }
