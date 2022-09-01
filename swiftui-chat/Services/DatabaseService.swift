@@ -159,7 +159,6 @@ class DatabaseService {
         }
     }
     
-    
     /// このメソッドは全てのチャットを戻します
     func getAllMessages(chat: Chat, completion: @escaping ([ChatMessage]) -> Void) {
         guard chat.id != nil else {
@@ -186,4 +185,22 @@ class DatabaseService {
             }
         }
     }
+    
+    
+    /// このメソッドはデータベースへメッセージなどの情報を追加します
+    func sendMessage(msg: String, chat: Chat) {
+        guard chat.id != nil else {
+            return
+        }
+        
+        let db = Firestore.firestore()
+        db.collection("chats").document(chat.id!).collection("msgs")
+            .addDocument(data: ["imageurl": "",
+                                "msg": msg,
+                                "senderid": AuthViewModel.getLoggedInUserId(),
+                                "timestamp": Date()])
+    }
+    
+    
+    
 }

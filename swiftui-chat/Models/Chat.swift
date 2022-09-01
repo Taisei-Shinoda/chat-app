@@ -34,7 +34,7 @@ struct ChatMessage: Codable, Identifiable {
     
     var imageurl: String?
     
-    var msgs: String
+    var msg: String
     
     @ServerTimestamp var timestamp: Date?
     

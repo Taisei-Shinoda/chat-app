@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ConversationView: View {
     
+    @EnvironmentObject var chatViewModel: ChatViewModel
+    
     @Binding var isChatShowing: Bool
     @State var chatMessage = ""
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             
             //TODO: チャットヘッダー
             HStack {
@@ -47,41 +49,38 @@ struct ConversationView: View {
                 
                 VStack (spacing: 24){
                     
-                    // 相手のメッセージ
-                    HStack {
-                        Text("相手のメッセージ")
-                            .font(.bodyParagraph)
-                            .foregroundColor(Color("text-primary"))
-                            .padding(.vertical, 16)
-                            .padding(.horizontal, 24)
-                            .background(Color("bubble-secondary"))
-                            .cornerRadius(30, corners: [.topLeft, .topRight, .bottomRight])
+                    ForEach(chatViewModel.messages) { msg in
                         
-                        Spacer()
+                        let isFromUser = msg.senderid == AuthViewModel.getLoggedInUserId()
                         
-                        Text("9:41")
-                            .font(.smallText)
-                            .foregroundColor(Color("text-timestamp"))
-                            .padding(.leading)
-                    }
-                    
-                    // あなたのメッセージ
-                    HStack {
-                        Text("9:41")
-                            .font(.smallText)
-                            .foregroundColor(Color("text-timestamp"))
-                            .padding(.trailing)
-                        
-                            Spacer()
-                        
-                        Text("あなたのメッセージ")
-                            .font(.bodyParagraph)
-                            .foregroundColor(Color("text-button"))
-                            .padding(.vertical, 16)
-                            .padding(.horizontal, 24)
-                            .background(Color("bubble-primary"))
-                            .cornerRadius(30, corners: [.topLeft, .topRight, .bottomLeft])
-
+                        HStack {
+                            
+                            if isFromUser {
+                                Text("9:41")
+                                    .font(.smallText)
+                                    .foregroundColor(Color("text-timestamp"))
+                                    .padding(.trailing)
+                                
+                                Spacer()
+                            }
+                            
+                            Text(msg.msg)
+                                .font(.bodyParagraph)
+                                .foregroundColor(isFromUser ? Color("text-button") : Color("text-primary"))
+                                .padding(.vertical, 16)
+                                .padding(.horizontal, 24)
+                                .background(isFromUser ? Color("bubble-primary") : Color("bubble-secondary"))
+                                .cornerRadius(30, corners: isFromUser ? [.topLeft, .topRight, .bottomLeft] : [.topLeft, .topRight, .bottomRight])
+                            
+                            if !isFromUser {
+                                Spacer()
+                                
+                                Text("9:41")
+                                    .font(.smallText)
+                                    .foregroundColor(Color("text-timestamp"))
+                                    .padding(.leading)
+                            }
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -94,7 +93,7 @@ struct ConversationView: View {
                 Color("background")
                     .ignoresSafeArea()
         
-                HStack {
+                HStack(spacing: 10) {
                     Button {
                         // TODO: ピッカー
                     } label: {
@@ -135,7 +134,13 @@ struct ConversationView: View {
                     
                     HStack {
                     Button {
-                        //TODO: SEND MESSE
+                        //TODO: メッセージの初期化
+                        
+                        
+                        //TODO: メッセージを送ります
+                        chatViewModel.sendMessage(msg: chatMessage)
+                        chatMessage = ""
+                        
                     } label: {
                         Image(systemName: "paperplane")
                             .resizable()
@@ -149,6 +154,10 @@ struct ConversationView: View {
             }
             .frame(height: 76)
         }
+        .onAppear {
+            chatViewModel.getMessages()
+        }
+        
     }
 }
 
@@ -157,3 +166,46 @@ struct ConversationView_Previews: PreviewProvider {
         ConversationView(isChatShowing: .constant(false))
     }
 }
+
+
+/*
+ 
+ // 相手のメッセージ
+ HStack {
+     Text("相手のメッセージ")
+         .font(.bodyParagraph)
+         .foregroundColor(Color("text-primary"))
+         .padding(.vertical, 16)
+         .padding(.horizontal, 24)
+         .background(Color("bubble-secondary"))
+         .cornerRadius(30, corners: [.topLeft, .topRight, .bottomRight])
+     
+     Spacer()
+     
+     Text("9:41")
+         .font(.smallText)
+         .foregroundColor(Color("text-timestamp"))
+         .padding(.leading)
+ }
+ 
+ // あなたのメッセージ
+ HStack {
+     Text("9:41")
+         .font(.smallText)
+         .foregroundColor(Color("text-timestamp"))
+         .padding(.trailing)
+     
+         Spacer()
+     
+     Text("あなたのメッセージ")
+         .font(.bodyParagraph)
+         .foregroundColor(Color("text-button"))
+         .padding(.vertical, 16)
+         .padding(.horizontal, 24)
+         .background(Color("bubble-primary"))
+         .cornerRadius(30, corners: [.topLeft, .topRight, .bottomLeft])
+
+ }
+
+ 
+ */
