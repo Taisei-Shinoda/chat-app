@@ -10,6 +10,8 @@ import SwiftUI
 struct ContactsListView: View {
     
     @EnvironmentObject var contactsViewModel: ContactsViewModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
+    
     @Binding var isChatShowing: Bool
     
     @State var filterText = ""
@@ -53,7 +55,9 @@ struct ContactsListView: View {
                     
                     Button {
                         // TODO: チャットリスト
+                        chatViewModel.getChatFor(contact: user)
                         isChatShowing = true
+                        
                     } label: {
                         //TODO: ボタンの行
                         ContanctRow(user: user)

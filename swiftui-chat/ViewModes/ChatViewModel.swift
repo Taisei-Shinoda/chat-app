@@ -22,10 +22,39 @@ class ChatViewModel: ObservableObject {
     init() {
         getChats()
     }
+    
 
     func getChats() {
         databaseService.getAllChats { chats in
             self.chats = chats
+        }
+    }
+    
+    func getChatFor(contact: User) {
+        guard contact.id != nil else {
+            return
+        }
+        let foundChat = chats.filter { chat in
+            return chat.numparticipants == 2 && chat.participantids.contains(contact.id!)
+        }
+        
+        if !foundChat.isEmpty {
+            
+            self.selectedChat = foundChat.first!
+            getMessages()
+            
+        } else {
+            var newChat = Chat(id: nil, numparticipants: 2, participantids: [AuthViewModel.getLoggedInUserId(), contact.id!],
+                               lastmsg: nil, updated: nil, msgs: nil)
+            
+            self.selectedChat = newChat
+            
+            databaseService.createChat(chat: newChat) { docId in
+                self.selectedChat = Chat(id: docId, numparticipants: 2,
+                                         participantids: [AuthViewModel.getLoggedInUserId(), contact.id!],
+                                         lastmsg: nil, updated: nil, msgs: nil)
+                self.chats.append(self.selectedChat!)
+            }
         }
     }
     
@@ -38,6 +67,7 @@ class ChatViewModel: ObservableObject {
         }
     }
     
+    
     func sendMessage(msg: String) {
         
         guard selectedChat != nil else {
@@ -45,6 +75,23 @@ class ChatViewModel: ObservableObject {
         }
         databaseService.sendMessage(msg: msg, chat: selectedChat!)
     }
+    
+    // MARK: - Helper Methods
+    
+    func getParticipantIds() -> [String] {
+        
+        guard selectedChat != nil else {
+            return [String]()
+        }
+        
+        let ids = selectedChat!.participantids.filter { id in
+            id != AuthViewModel.getLoggedInUserId()
+        }
+        return ids
+    }
+    
+    
+    
 }
 
 

@@ -22,6 +22,7 @@
 		C65A853D28BF502B00088AF3 /* RoundedCornerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65A853C28BF502B00088AF3 /* RoundedCornerExtension.swift */; };
 		C65A853F28BF96A300088AF3 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65A853E28BF96A300088AF3 /* Chat.swift */; };
 		C65A854128BF9AEF00088AF3 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65A854028BF9AEF00088AF3 /* ChatViewModel.swift */; };
+		C6AAFCBD28C09DA200584B66 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAFCBC28C09DA200584B66 /* DateHelper.swift */; };
 		C6B5378E28B10CA100C0FDCF /* swiftui_chatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B5378D28B10CA100C0FDCF /* swiftui_chatApp.swift */; };
 		C6B5379028B10CA100C0FDCF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B5378F28B10CA100C0FDCF /* RootView.swift */; };
 		C6B5379228B10CA200C0FDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6B5379128B10CA200C0FDCF /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		C65A853C28BF502B00088AF3 /* RoundedCornerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerExtension.swift; sourceTree = "<group>"; };
 		C65A853E28BF96A300088AF3 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		C65A854028BF9AEF00088AF3 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		C6AAFCBC28C09DA200584B66 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		C6B5378A28B10CA100C0FDCF /* swiftui-chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftui-chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B5378D28B10CA100C0FDCF /* swiftui_chatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftui_chatApp.swift; sourceTree = "<group>"; };
 		C6B5378F28B10CA100C0FDCF /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				C6CF16FC28B660C1001C23A7 /* CreateProfileTextfieldStyle.swift */,
 				C6CF170628B7AA9F001C23A7 /* TextHelper.swift */,
 				C65A853C28BF502B00088AF3 /* RoundedCornerExtension.swift */,
+				C6AAFCBC28C09DA200584B66 /* DateHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				C65A853628BCB80900088AF3 /* ContanctRow.swift in Sources */,
 				C6CF170528B77AD2001C23A7 /* DatabaseService.swift in Sources */,
 				C6CF16FD28B660C1001C23A7 /* CreateProfileTextfieldStyle.swift in Sources */,
+				C6AAFCBD28C09DA200584B66 /* DateHelper.swift in Sources */,
 				C621741228B5FDDE00AF967E /* SyncContactsView.swift in Sources */,
 				C6B537BC28B376B300C0FDCF /* AppDelegate.swift in Sources */,
 				C6CF170728B7AA9F001C23A7 /* TextHelper.swift in Sources */,

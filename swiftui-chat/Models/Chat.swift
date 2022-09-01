@@ -14,11 +14,11 @@ struct Chat: Codable, Identifiable {
     
     @DocumentID var id: String?
     
-    var lastmsg: String?
-    
     var numparticipants: Int
     
     var participantids: [String]
+    
+    var lastmsg: String?
     
     @ServerTimestamp var updated: Date?
     
