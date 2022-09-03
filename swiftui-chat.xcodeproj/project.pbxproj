@@ -23,6 +23,7 @@
 		C65A853F28BF96A300088AF3 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65A853E28BF96A300088AF3 /* Chat.swift */; };
 		C65A854128BF9AEF00088AF3 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65A854028BF9AEF00088AF3 /* ChatViewModel.swift */; };
 		C6AAFCBD28C09DA200584B66 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAFCBC28C09DA200584B66 /* DateHelper.swift */; };
+		C6AAFCBF28C2EA8100584B66 /* ChatsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AAFCBE28C2EA8100584B66 /* ChatsListRow.swift */; };
 		C6B5378E28B10CA100C0FDCF /* swiftui_chatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B5378D28B10CA100C0FDCF /* swiftui_chatApp.swift */; };
 		C6B5379028B10CA100C0FDCF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B5378F28B10CA100C0FDCF /* RootView.swift */; };
 		C6B5379228B10CA200C0FDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6B5379128B10CA200C0FDCF /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		C65A853E28BF96A300088AF3 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		C65A854028BF9AEF00088AF3 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		C6AAFCBC28C09DA200584B66 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		C6AAFCBE28C2EA8100584B66 /* ChatsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsListRow.swift; sourceTree = "<group>"; };
 		C6B5378A28B10CA100C0FDCF /* swiftui-chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftui-chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B5378D28B10CA100C0FDCF /* swiftui_chatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftui_chatApp.swift; sourceTree = "<group>"; };
 		C6B5378F28B10CA100C0FDCF /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				C65A853328BCA63200088AF3 /* ChatsListView.swift */,
 				C65A853728BF3A0900088AF3 /* ConversationView.swift */,
+				C6AAFCBE28C2EA8100584B66 /* ChatsListRow.swift */,
 			);
 			path = "Chats View";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				C621740C28B5FD9200AF967E /* PhoneNumberView.swift in Sources */,
 				C6B537AF28B3695C00C0FDCF /* TabBarButton.swift in Sources */,
 				C621740E28B5FDA700AF967E /* VerificationVIew.swift in Sources */,
+				C6AAFCBF28C2EA8100584B66 /* ChatsListRow.swift in Sources */,
 				C6B537C228B5FAF600C0FDCF /* OnboadingContainerView.swift in Sources */,
 				C65A853228BCA62200088AF3 /* ContactsListView.swift in Sources */,
 				C6CF170128B6F08B001C23A7 /* ContactsViewModel.swift in Sources */,

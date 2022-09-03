@@ -64,6 +64,7 @@ class ContactsViewModel: ObservableObject {
         })
     }
     
+    /// ユーザーIDのリストを指定すると、ユーザーオブジェクトの同じIDを持つリストを返す。
     func getParticipants(ids: [String]) -> [User] {
         let foundUsers = users.filter { user in
             if user.id == nil {

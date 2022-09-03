@@ -10,22 +10,60 @@ import SwiftUI
 struct ChatsListView: View {
     
     @EnvironmentObject var chatViewModel: ChatViewModel
+    @EnvironmentObject var contactsViewModel: ContactsViewModel
+    
     @Binding var isChatShowing: Bool
     
     var body: some View {
-        
-        if chatViewModel.chats.count > 0 {
-            List(chatViewModel.chats) { chat in
-                
+        VStack {
+            HStack {
+                Text("Chats")
+                    .font(.pageTitle)
+                Spacer()
                 Button {
-                    chatViewModel.selectedChat = chat
-                    isChatShowing = true
+                    //TODO: 設定
+                    
                 } label: {
-                    Text(chat.id ?? "空のチャットID")
+                    Image(systemName: "gearshape.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .tint(Color("icons-secondary"))
                 }
             }
-        } else {
-            Text("No Chats")
+            .padding(.top, 20)
+            .padding(.horizontal)
+            
+            
+            if chatViewModel.chats.count > 0 {
+                List(chatViewModel.chats) { chat in
+                    
+                    Button {
+                        chatViewModel.selectedChat = chat
+                        isChatShowing = true
+                    } label: {
+                        ChatsListRow(chat: chat,
+                                     otherParticipants: contactsViewModel.getParticipants(ids: chat.participantids))
+                    }
+                    .buttonStyle(.plain)
+                    .listRowBackground(Color(.clear))
+                    .listRowSeparator(.hidden)
+                }
+                .listStyle(.plain)
+            }
+            else {
+                Spacer()
+                
+                Image("no-chats-yet")
+                Text("Hmm... No chats yet")
+                    .font(.titleText)
+                    .padding(.top, 32)
+                
+                Text("Chat a Friend to Get Started")
+                    .font(.bodyParagraph)
+                    .padding(.top, 8)
+                
+                Spacer()
+            }
         }
     }
 }

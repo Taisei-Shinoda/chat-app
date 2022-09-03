@@ -199,6 +199,11 @@ class DatabaseService {
                                 "msg": msg,
                                 "senderid": AuthViewModel.getLoggedInUserId(),
                                 "timestamp": Date()])
+        
+        db.collection("chats")
+            .document(chat.id!).setData(["updated": Date(),
+                                         "lastmsg": msg],
+                                        merge: true)
     }
     
     
