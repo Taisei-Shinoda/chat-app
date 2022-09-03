@@ -12,6 +12,7 @@ struct RootView: View {
     @Environment(\.scenePhase) var scenePhase
     
     @EnvironmentObject var chatViewModel: ChatViewModel
+    @EnvironmentObject var contactsViewModel: ContactsViewModel
     
     @State var selectedTab: Tabs = .contacts
     @State var isOnboarding = !AuthViewModel.isUserLoggedIn()
@@ -37,6 +38,11 @@ struct RootView: View {
                 CustomTabBar(selectedTabs: $selectedTab)
             }
         }
+        .onAppear(perform: {
+            if !isOnboarding {
+                contactsViewModel.getLocalContacts()
+            }
+        })
         /// true の場合、可能な限り画面全体をカバーするモーダル ビューを表示します。
         .fullScreenCover(isPresented: $isOnboarding) {
             // on DISMISS

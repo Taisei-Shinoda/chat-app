@@ -151,10 +151,9 @@ struct ConversationView: View {
                     }
                     .frame(height: 44)
                     
-                    HStack {
                     Button {
                         //TODO: メッセージの初期化
-                        
+                        chatMessage = chatMessage.trimmingCharacters(in: .whitespacesAndNewlines)
                         
                         //TODO: メッセージを送ります
                         chatViewModel.sendMessage(msg: chatMessage)
@@ -165,9 +164,9 @@ struct ConversationView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24)
-                            .tint(Color("icons-secondary"))
+                            .tint(Color("icons-primary"))
                     }
-                    }
+                    .disabled(chatMessage.trimmingCharacters(in: .whitespacesAndNewlines) == "")
                 }
                 .padding(.horizontal)
             }
