@@ -14,6 +14,10 @@ import FirebaseStorage
 
 class DatabaseService {
     
+    var chatListViewListeners = [ListenerRegistration]()
+    var conversationViewListeners = [ListenerRegistration]()
+    
+    
     func getPlatformUsers(localContacts: [CNContact],
                           completion: @escaping ([User]) -> Void) {
         
@@ -143,7 +147,7 @@ class DatabaseService {
         
         let chatsQuery = db.collection("chats").whereField("participantids", arrayContains: AuthViewModel.getLoggedInUserId())
         
-        chatsQuery.getDocuments { snapshot, error in
+        let listener = chatsQuery.addSnapshotListener { snapshot, error in
             if snapshot != nil && error == nil {
                 var chats = [Chat]()
                 for doc in snapshot!.documents {
@@ -157,6 +161,10 @@ class DatabaseService {
                 print("データベースの検索でエラーが発生しました")
             }
         }
+        
+        //
+        chatListViewListeners.append(listener)
+        
     }
     
     /// このメソッドは全てのチャットを戻します
@@ -170,7 +178,7 @@ class DatabaseService {
         
         let msgsQuery = db.collection("chats").document(chat.id!).collection("msgs").order(by: "timestamp")
         
-        msgsQuery.getDocuments { snapshot, error in
+        let listener = msgsQuery.addSnapshotListener { snapshot, error in
             if snapshot != nil && error == nil {
                 var messages = [ChatMessage]()
                 for doc in snapshot!.documents {
@@ -184,6 +192,9 @@ class DatabaseService {
                 print("データベースの検索でエラーが発生しました")
             }
         }
+        
+        //
+        conversationViewListeners.append(listener)
     }
     
     
@@ -218,4 +229,15 @@ class DatabaseService {
         
     }
     
+    func detachChatListViewListeners() {
+        for listener in chatListViewListeners {
+            listener.remove()
+        }
+    }
+    
+    func detachConversationViewListeners() {
+        for listener in conversationViewListeners {
+            listener.remove()
+        }
+    }
 }

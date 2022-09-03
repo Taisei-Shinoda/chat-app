@@ -9,6 +9,10 @@ import SwiftUI
 
 struct RootView: View {
     
+    @Environment(\.scenePhase) var scenePhase
+    
+    @EnvironmentObject var chatViewModel: ChatViewModel
+    
     @State var selectedTab: Tabs = .contacts
     @State var isOnboarding = !AuthViewModel.isUserLoggedIn()
     
@@ -42,6 +46,16 @@ struct RootView: View {
         }
         .fullScreenCover(isPresented: $isChatShowing, onDismiss: nil) {
             ConversationView(isChatShowing: $isChatShowing)
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                print("アクティブ")
+            } else if newPhase == .inactive {
+                print("イナクティブ")
+            } else if newPhase == .background {
+                print("バックグラウンド")
+                chatViewModel.chatListViewCleanup()
+            }
         }
         
     }

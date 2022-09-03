@@ -76,6 +76,17 @@ class ChatViewModel: ObservableObject {
         databaseService.sendMessage(msg: msg, chat: selectedChat!)
     }
     
+    
+    func conversationViewCleanup() {
+        databaseService.detachConversationViewListeners()
+    }
+    
+    
+    func chatListViewCleanup() {
+        databaseService.detachChatListViewListeners()
+    }
+    
+    
     // MARK: - Helper Methods
     
     func getParticipantIds() -> [String] {
@@ -89,9 +100,6 @@ class ChatViewModel: ObservableObject {
         }
         return ids
     }
-    
-    
-    
 }
 
 

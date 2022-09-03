@@ -55,48 +55,57 @@ struct ConversationView: View {
             .frame(height: 104)
             
             //TODO: チャットログ
-            ScrollView {
-                
-                VStack (spacing: 24){
+            ScrollViewReader { proxy in
+                ScrollView {
                     
-                    ForEach(chatViewModel.messages) { msg in
+                    VStack (spacing: 24){
                         
-                        let isFromUser = msg.senderid == AuthViewModel.getLoggedInUserId()
-                        
-                        HStack {
+                        ForEach(Array(chatViewModel.messages.enumerated()), id: \.element) { index, msg in
                             
-                            if isFromUser {
-                                Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
-                                    .font(.smallText)
-                                    .foregroundColor(Color("text-timestamp"))
-                                    .padding(.trailing)
+                            let isFromUser = msg.senderid == AuthViewModel.getLoggedInUserId()
+                            
+                            // 動的メッセージ
+                            HStack {
                                 
-                                Spacer()
-                            }
-                            
-                            Text(msg.msg)
-                                .font(.bodyParagraph)
-                                .foregroundColor(isFromUser ? Color("text-button") : Color("text-primary"))
-                                .padding(.vertical, 16)
-                                .padding(.horizontal, 24)
-                                .background(isFromUser ? Color("bubble-primary") : Color("bubble-secondary"))
-                                .cornerRadius(30, corners: isFromUser ? [.topLeft, .topRight, .bottomLeft] : [.topLeft, .topRight, .bottomRight])
-                            
-                            if !isFromUser {
-                                Spacer()
+                                if isFromUser {
+                                    Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
+                                        .font(.smallText)
+                                        .foregroundColor(Color("text-timestamp"))
+                                        .padding(.trailing)
+                                    
+                                    Spacer()
+                                }
                                 
-                                Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
-                                    .font(.smallText)
-                                    .foregroundColor(Color("text-timestamp"))
-                                    .padding(.leading)
+                                Text(msg.msg)
+                                    .font(.bodyParagraph)
+                                    .foregroundColor(isFromUser ? Color("text-button") : Color("text-primary"))
+                                    .padding(.vertical, 16)
+                                    .padding(.horizontal, 24)
+                                    .background(isFromUser ? Color("bubble-primary") : Color("bubble-secondary"))
+                                    .cornerRadius(30, corners: isFromUser ? [.topLeft, .topRight, .bottomLeft] : [.topLeft, .topRight, .bottomRight])
+                                
+                                if !isFromUser {
+                                    Spacer()
+                                    
+                                    Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
+                                        .font(.smallText)
+                                        .foregroundColor(Color("text-timestamp"))
+                                        .padding(.leading)
+                                }
                             }
+                            .id(index)
                         }
                     }
+                    .padding(.horizontal)
+                    .padding(.top, 24)
                 }
-                .padding(.horizontal)
-                .padding(.top, 24)
+                .background(Color("background"))
+                .onChange(of: chatViewModel.messages.count) { newCount in
+                    withAnimation {
+                        proxy.scrollTo(newCount - 1)
+                    }
+                }
             }
-            .background(Color("background"))
             
             //TODO: メッセージバー
             ZStack {
@@ -170,7 +179,9 @@ struct ConversationView: View {
             let ids = chatViewModel.getParticipantIds()
             self.participants = contactsViewModel.getParticipants(ids: ids)
         }
-        
+        .onDisappear() {
+            chatViewModel.conversationViewCleanup()
+        }
     }
 }
 
