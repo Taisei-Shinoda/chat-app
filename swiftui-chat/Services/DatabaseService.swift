@@ -198,7 +198,7 @@ class DatabaseService {
     }
     
     
-    /// このメソッドはデータベースへメッセージなどの情報を追加します
+    /// このメソッドはデータベースへメッセージやIDなどの情報を追加します
     func sendMessage(msg: String, chat: Chat) {
         guard chat.id != nil else {
             return
@@ -217,6 +217,46 @@ class DatabaseService {
                                         merge: true)
     }
     
+    /// このメソッドはデータベースへ画像の情報を追加します
+    func sendPhotoMessage(image: UIImage, chat: Chat) {
+        
+        guard chat.id != nil else {
+            return
+        }
+        
+        // ストレージ側
+        let storageRef = Storage.storage().reference()
+        let imageData = image.jpegData(compressionQuality: 0.8)
+        
+        guard imageData != nil else {
+            return
+        }
+        
+        let path = "images/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
+        
+        fileRef.putData(imageData!, metadata: nil) { metadata, error in
+            if error == nil && metadata != nil {
+                fileRef.downloadURL { url, error in
+                    if url != nil && error == nil {
+                        
+                        // データベース側
+                        let db = Firestore.firestore()
+                        db.collection("chats").document(chat.id!).collection("msgs")
+                            .addDocument(data: ["imageurl": url!.absoluteString,
+                                                "msg": "",
+                                                "senderid": AuthViewModel.getLoggedInUserId(),
+                                                "timestamp": Date()])
+                        
+                        db.collection("chats")
+                            .document(chat.id!).setData(["updated": Date(),
+                                                         "lastmsg": "Image"],
+                                                        merge: true)
+                    }
+                }
+            }
+        }
+    }
     
     func createChat(chat: Chat, completion: @escaping (String) -> Void) {
         let db = Firestore.firestore()

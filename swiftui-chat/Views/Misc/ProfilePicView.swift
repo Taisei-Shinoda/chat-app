@@ -29,7 +29,6 @@ struct ProfilePicView: View {
                         .clipShape(Circle())
                         .scaledToFill()
                         .clipped()
-                    
                 }
                 else {
                     //TODO: ユーザーの画像からURLを作成します

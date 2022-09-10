@@ -13,6 +13,14 @@ struct ConversationView: View {
     @EnvironmentObject var contactsViewModel: ContactsViewModel
     
     @Binding var isChatShowing: Bool
+    
+    @State var selectedImage: UIImage?
+    @State var isPickerShowing = false
+    
+    @State var isSourceMenuShowing = false
+    @State var source: UIImagePickerController.SourceType = .photoLibrary
+    
+    
     @State var chatMessage = ""
     
     @State var participants = [User]()
@@ -66,7 +74,6 @@ struct ConversationView: View {
                             
                             // 動的メッセージ
                             HStack {
-                                
                                 if isFromUser {
                                     Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
                                         .font(.smallText)
@@ -76,14 +83,14 @@ struct ConversationView: View {
                                     Spacer()
                                 }
                                 
-                                Text(msg.msg)
-                                    .font(.bodyParagraph)
-                                    .foregroundColor(isFromUser ? Color("text-button") : Color("text-primary"))
-                                    .padding(.vertical, 16)
-                                    .padding(.horizontal, 24)
-                                    .background(isFromUser ? Color("bubble-primary") : Color("bubble-secondary"))
-                                    .cornerRadius(30, corners: isFromUser ? [.topLeft, .topRight, .bottomLeft] : [.topLeft, .topRight, .bottomRight])
-                                
+                                if msg.imageurl != "" {
+                                    // 画像
+                                    ConversationPhotoMessage(imageUrl: msg.imageurl!, isFromUser: isFromUser)
+                                }
+                                else {
+                                    // テキスト
+                                    ConversationTextMessage(msg: msg.msg, isFromUser: isFromUser)
+                                }
                                 if !isFromUser {
                                     Spacer()
                                     
@@ -115,6 +122,8 @@ struct ConversationView: View {
                 HStack(spacing: 10) {
                     Button {
                         // TODO: ピッカー
+                        isSourceMenuShowing = true
+                        
                     } label: {
                         Image(systemName: "camera")
                             .resizable()
@@ -128,36 +137,69 @@ struct ConversationView: View {
                             .foregroundColor(Color("date-pill"))
                             .cornerRadius(50)
                         
-                        TextField("Aa", text: $chatMessage)
-                            .foregroundColor(Color("text-input"))
-                            .font(.bodyParagraph )
-                            .padding(10)
-                        
-                        HStack {
-                            Spacer()
+                        if selectedImage != nil {
+                            Text("Image")
+                                .foregroundColor(Color("text-input"))
+                                .font(.bodyParagraph )
+                                .padding(10)
                             
-                            Button {
-                                //
-                            } label: {
-                                Image(systemName: "face.smiling")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 24, height: 24)
-                                    .foregroundColor(Color("text-input"))
+                            HStack {
+                                Spacer()
+                                
+                                Button {
+                                    selectedImage = nil
+                                    
+                                } label: {
+                                    Image(systemName: "multiply.circle.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 24, height: 24)
+                                        .foregroundColor(Color("text-input"))
+                                }
                             }
+                            .padding(.trailing, 12)
+                            
+                        } else {
+                            
+                            TextField("Aa", text: $chatMessage)
+                                .foregroundColor(Color("text-input"))
+                                .font(.bodyParagraph )
+                                .padding(10)
+                            
+                            HStack {
+                                Spacer()
+                                
+                                Button {
+                                    //
+                                } label: {
+                                    Image(systemName: "face.smiling")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 24, height: 24)
+                                        .foregroundColor(Color("text-input"))
+                                }
+                            }
+                            .padding(.trailing, 12)
                         }
-                        .padding(.trailing, 12)
-                        
                     }
                     .frame(height: 44)
                     
                     Button {
-                        //TODO: メッセージの初期化
-                        chatMessage = chatMessage.trimmingCharacters(in: .whitespacesAndNewlines)
                         
-                        //TODO: メッセージを送ります
-                        chatViewModel.sendMessage(msg: chatMessage)
-                        chatMessage = ""
+                        //TODO: 画像を選択した場合、画像を送信してください
+                        if selectedImage != nil {
+                            chatViewModel.sendPhotoMessage(image: selectedImage!)
+                            selectedImage = nil
+                            
+                        }
+                        else {
+                            //TODO: メッセージの初期化
+                            chatMessage = chatMessage.trimmingCharacters(in: .whitespacesAndNewlines)
+                            
+                            //TODO: メッセージを送ります
+                            chatViewModel.sendMessage(msg: chatMessage)
+                            chatMessage = ""
+                        }
                         
                     } label: {
                         Image(systemName: "paperplane")
@@ -166,7 +208,7 @@ struct ConversationView: View {
                             .frame(width: 24, height: 24)
                             .tint(Color("icons-primary"))
                     }
-                    .disabled(chatMessage.trimmingCharacters(in: .whitespacesAndNewlines) == "")
+                    .disabled(chatMessage.trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectedImage == nil)
                 }
                 .padding(.horizontal)
             }
@@ -180,6 +222,31 @@ struct ConversationView: View {
         }
         .onDisappear() {
             chatViewModel.conversationViewCleanup()
+        }
+        .confirmationDialog("From Where", isPresented: $isSourceMenuShowing, actions: {
+        
+            Button {
+                // Set the SOORCE
+                self.source = .photoLibrary
+                isPickerShowing = true
+            } label: {
+                Text("Photo Library")
+            }
+            
+            /// シミュレーターにはカメラ機能がないので、クラッシュ防止のためこのメソッドを書きました。
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                Button {
+                    // Set the SOORCE
+                    self.source = .camera
+                    isPickerShowing = true
+                } label: {
+                    Text("Take Photo")
+                }
+            }
+        })
+        .sheet(isPresented: $isPickerShowing) {
+            // TODO: ImagePicker を表示します
+            ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing, source: self.source)
         }
     }
 }
