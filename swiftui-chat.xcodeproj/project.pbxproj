@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C60AE64128CC373000CF7132 /* ConversationTextMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64028CC373000CF7132 /* ConversationTextMessage.swift */; };
 		C60AE64328CC392000CF7132 /* ConversationPhotoMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64228CC392000CF7132 /* ConversationPhotoMessage.swift */; };
+		C60AE64528CC813800CF7132 /* ContactsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64428CC813800CF7132 /* ContactsPicker.swift */; };
 		C621740A28B5FD8400AF967E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740928B5FD8400AF967E /* WelcomeView.swift */; };
 		C621740C28B5FD9200AF967E /* PhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740B28B5FD9200AF967E /* PhoneNumberView.swift */; };
 		C621740E28B5FDA700AF967E /* VerificationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740D28B5FDA700AF967E /* VerificationVIew.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		C60AE64028CC373000CF7132 /* ConversationTextMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTextMessage.swift; sourceTree = "<group>"; };
 		C60AE64228CC392000CF7132 /* ConversationPhotoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationPhotoMessage.swift; sourceTree = "<group>"; };
+		C60AE64428CC813800CF7132 /* ContactsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPicker.swift; sourceTree = "<group>"; };
 		C621740928B5FD8400AF967E /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C621740B28B5FD9200AF967E /* PhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberView.swift; sourceTree = "<group>"; };
 		C621740D28B5FDA700AF967E /* VerificationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationVIew.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				C65A853728BF3A0900088AF3 /* ConversationView.swift */,
 				C60AE64228CC392000CF7132 /* ConversationPhotoMessage.swift */,
 				C60AE64028CC373000CF7132 /* ConversationTextMessage.swift */,
+				C60AE64428CC813800CF7132 /* ContactsPicker.swift */,
 			);
 			path = "Chats View";
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C60AE64528CC813800CF7132 /* ContactsPicker.swift in Sources */,
 				C65A853628BCB80900088AF3 /* ContanctRow.swift in Sources */,
 				C6CF170528B77AD2001C23A7 /* DatabaseService.swift in Sources */,
 				C6CF16FD28B660C1001C23A7 /* CreateProfileTextfieldStyle.swift in Sources */,

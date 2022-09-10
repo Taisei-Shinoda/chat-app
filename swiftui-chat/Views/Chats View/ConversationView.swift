@@ -20,105 +20,135 @@ struct ConversationView: View {
     @State var isSourceMenuShowing = false
     @State var source: UIImagePickerController.SourceType = .photoLibrary
     
+    @State var isContactsPickerShowing = false
     
     @State var chatMessage = ""
     
     @State var participants = [User]()
     
     var body: some View {
-        VStack(spacing: 0) {
+        ZStack {
+            Color("background")
+                .ignoresSafeArea()
             
-            //TODO: チャットヘッダー
-            HStack {
-                VStack(alignment: .leading) {
-                    Button {
-                        isChatShowing = false
-                    } label: {
-                        Image(systemName: "arrow.backward")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(Color("text-header"))
-                    }
-                    .padding(.bottom, 16)
-                    
-                    // 連絡先の名前
-                    if participants.count > 0 {
-                        let participant = participants.first
-                        Text("\(participant?.firstname ?? "") \(participant?.lastname ?? "")")
-                            .font(.chatHeading)
-                            .foregroundColor(Color("text-header"))
-                        
-                    }
-                }
-                Spacer()
+            VStack(spacing: 0) {
                 
-                // 連絡先のサムネイル画像
-                if participants.count > 0 {
-                    let participant = participants.first
-                    ProfilePicView(user: participant!)
-                }
-            }
-            .padding(.horizontal)
-            .frame(height: 104)
-            
-            //TODO: チャットログ
-            ScrollViewReader { proxy in
-                ScrollView {
+                //TODO: チャットヘッダー
+                ZStack {
+                    Color(.white)
+                        .ignoresSafeArea()
                     
-                    VStack (spacing: 24){
-                        
-                        ForEach(Array(chatViewModel.messages.enumerated()), id: \.element) { index, msg in
+                    HStack {
+                        VStack(alignment: .leading) {
                             
-                            let isFromUser = msg.senderid == AuthViewModel.getLoggedInUserId()
-                            
-                            // 動的メッセージ
                             HStack {
-                                if isFromUser {
-                                    Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
-                                        .font(.smallText)
-                                        .foregroundColor(Color("text-timestamp"))
-                                        .padding(.trailing)
-                                    
-                                    Spacer()
+                                Button {
+                                    isChatShowing = false
+                                } label: {
+                                    Image(systemName: "arrow.backward")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 24, height: 24)
+                                        .foregroundColor(Color("text-header"))
                                 }
-                                
-                                if msg.imageurl != "" {
-                                    // 画像
-                                    ConversationPhotoMessage(imageUrl: msg.imageurl!, isFromUser: isFromUser)
-                                }
-                                else {
-                                    // テキスト
-                                    ConversationTextMessage(msg: msg.msg, isFromUser: isFromUser)
-                                }
-                                if !isFromUser {
-                                    Spacer()
-                                    
-                                    Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
-                                        .font(.smallText)
-                                        .foregroundColor(Color("text-timestamp"))
-                                        .padding(.leading)
+                                if participants.count == 0 {
+                                    Text("New Message")
+                                        .font(.chatHeading)
+                                        .foregroundColor(Color("text-header"))
                                 }
                             }
-                            .id(index)
+                            .padding(.bottom, 16)
+                            
+                            // 連絡先の名前
+                            if participants.count > 0 {
+                                let participant = participants.first
+                                Text("\(participant?.firstname ?? "") \(participant?.lastname ?? "")")
+                                    .font(.chatHeading)
+                                    .foregroundColor(Color("text-header"))
+                            }
+                            else {
+                                Text("Recipient")
+                                    .font(.bodyParagraph)
+                                    .foregroundColor(Color("text-input"))
+                            }
+                        }
+                        Spacer()
+                        
+                        // 連絡先のサムネイル画像
+                        if participants.count > 0 {
+                            let participant = participants.first
+                            ProfilePicView(user: participant!)
+                        }
+                        else {
+                            // 新しいメッセージを開始
+                            Button {
+                                
+                                isContactsPickerShowing = true
+                                
+                            } label: {
+                                Image(systemName: "plus.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(Color("button-primary"))
+                                    .frame(width: 25, height: 25)
+                            }
                         }
                     }
                     .padding(.horizontal)
-                    .padding(.top, 24)
                 }
-                .background(Color("background"))
-                .onChange(of: chatViewModel.messages.count) { newCount in
-                    withAnimation {
-                        proxy.scrollTo(newCount - 1)
+                .frame(height: 104)
+                
+                //TODO: チャットログ
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        
+                        VStack (spacing: 24){
+                            
+                            ForEach(Array(chatViewModel.messages.enumerated()), id: \.element) { index, msg in
+                                
+                                let isFromUser = msg.senderid == AuthViewModel.getLoggedInUserId()
+                                
+                                // 動的メッセージ
+                                HStack {
+                                    if isFromUser {
+                                        Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
+                                            .font(.smallText)
+                                            .foregroundColor(Color("text-timestamp"))
+                                            .padding(.trailing)
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    if msg.imageurl != "" {
+                                        // 画像
+                                        ConversationPhotoMessage(imageUrl: msg.imageurl!, isFromUser: isFromUser)
+                                    }
+                                    else {
+                                        // テキスト
+                                        ConversationTextMessage(msg: msg.msg, isFromUser: isFromUser)
+                                    }
+                                    if !isFromUser {
+                                        Spacer()
+                                        
+                                        Text(DateHelper.chatTimestampFrom(date: msg.timestamp))
+                                            .font(.smallText)
+                                            .foregroundColor(Color("text-timestamp"))
+                                            .padding(.leading)
+                                    }
+                                }
+                                .id(index)
+                            }
+                        }
+                        .padding(.horizontal)
+                        .padding(.top, 24)
+                    }
+                    .onChange(of: chatViewModel.messages.count) { newCount in
+                        withAnimation {
+                            proxy.scrollTo(newCount - 1)
+                        }
                     }
                 }
-            }
-            
-            //TODO: メッセージバー
-            ZStack {
-                Color("background")
-                    .ignoresSafeArea()
-        
+                
+                //TODO: チャットメッセージバー
                 HStack(spacing: 10) {
                     Button {
                         // TODO: ピッカー
@@ -159,27 +189,12 @@ struct ConversationView: View {
                             }
                             .padding(.trailing, 12)
                             
-                        } else {
-                            
+                        }
+                        else {
                             TextField("Aa", text: $chatMessage)
                                 .foregroundColor(Color("text-input"))
                                 .font(.bodyParagraph )
                                 .padding(10)
-                            
-                            HStack {
-                                Spacer()
-                                
-                                Button {
-                                    //
-                                } label: {
-                                    Image(systemName: "face.smiling")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 24, height: 24)
-                                        .foregroundColor(Color("text-input"))
-                                }
-                            }
-                            .padding(.trailing, 12)
                         }
                     }
                     .frame(height: 44)
@@ -210,9 +225,10 @@ struct ConversationView: View {
                     }
                     .disabled(chatMessage.trimmingCharacters(in: .whitespacesAndNewlines) == "" && selectedImage == nil)
                 }
+                .disabled(participants.count == 0)
                 .padding(.horizontal)
+                .frame(height: 76)
             }
-            .frame(height: 76)
         }
         .onAppear {
             chatViewModel.getMessages()
@@ -224,7 +240,7 @@ struct ConversationView: View {
             chatViewModel.conversationViewCleanup()
         }
         .confirmationDialog("From Where", isPresented: $isSourceMenuShowing, actions: {
-        
+            
             Button {
                 // Set the SOORCE
                 self.source = .photoLibrary
@@ -248,6 +264,13 @@ struct ConversationView: View {
             // TODO: ImagePicker を表示します
             ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing, source: self.source)
         }
+        .sheet(isPresented: $isContactsPickerShowing) {
+            //
+        } content: {
+            ContactsPicker(isContactsPickerShowing: $isContactsPickerShowing,
+                           selectedContacts: $participants)
+        }
+
     }
 }
 
@@ -262,40 +285,40 @@ struct ConversationView_Previews: PreviewProvider {
  
  // 相手のメッセージ
  HStack {
-     Text("相手のメッセージ")
-         .font(.bodyParagraph)
-         .foregroundColor(Color("text-primary"))
-         .padding(.vertical, 16)
-         .padding(.horizontal, 24)
-         .background(Color("bubble-secondary"))
-         .cornerRadius(30, corners: [.topLeft, .topRight, .bottomRight])
-     
-     Spacer()
-     
-     Text("9:41")
-         .font(.smallText)
-         .foregroundColor(Color("text-timestamp"))
-         .padding(.leading)
+ Text("相手のメッセージ")
+ .font(.bodyParagraph)
+ .foregroundColor(Color("text-primary"))
+ .padding(.vertical, 16)
+ .padding(.horizontal, 24)
+ .background(Color("bubble-secondary"))
+ .cornerRadius(30, corners: [.topLeft, .topRight, .bottomRight])
+ 
+ Spacer()
+ 
+ Text("9:41")
+ .font(.smallText)
+ .foregroundColor(Color("text-timestamp"))
+ .padding(.leading)
  }
  
  // あなたのメッセージ
  HStack {
-     Text("9:41")
-         .font(.smallText)
-         .foregroundColor(Color("text-timestamp"))
-         .padding(.trailing)
-     
-         Spacer()
-     
-     Text("あなたのメッセージ")
-         .font(.bodyParagraph)
-         .foregroundColor(Color("text-button"))
-         .padding(.vertical, 16)
-         .padding(.horizontal, 24)
-         .background(Color("bubble-primary"))
-         .cornerRadius(30, corners: [.topLeft, .topRight, .bottomLeft])
-
+ Text("9:41")
+ .font(.smallText)
+ .foregroundColor(Color("text-timestamp"))
+ .padding(.trailing)
+ 
+ Spacer()
+ 
+ Text("あなたのメッセージ")
+ .font(.bodyParagraph)
+ .foregroundColor(Color("text-button"))
+ .padding(.vertical, 16)
+ .padding(.horizontal, 24)
+ .background(Color("bubble-primary"))
+ .cornerRadius(30, corners: [.topLeft, .topRight, .bottomLeft])
+ 
  }
-
+ 
  
  */

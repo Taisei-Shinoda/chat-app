@@ -35,7 +35,7 @@ struct RootView: View {
                 
                 Spacer()
                 
-                CustomTabBar(selectedTabs: $selectedTab)
+                CustomTabBar(selectedTabs: $selectedTab, isChatShowing: $isChatShowing)
             }
         }
         .onAppear(perform: {
