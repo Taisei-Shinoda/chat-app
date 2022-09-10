@@ -19,6 +19,8 @@ struct CustomTabBar: View {
     @Binding var selectedTabs: Tabs
     @Binding var isChatShowing: Bool
     
+    @EnvironmentObject var chatViewModel: ChatViewModel
+    
     var body: some View {
         HStack (alignment: .center) {
             
@@ -35,10 +37,12 @@ struct CustomTabBar: View {
             
             
             Button {
-                // TODO: ログアウト
+                
+                chatViewModel.clearSelectedChat()
                 
                 isChatShowing = true
                 
+//                 TODO: ログアウト
 //                AuthViewModel.logout()
             } label: {
                 

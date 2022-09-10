@@ -265,7 +265,9 @@ struct ConversationView: View {
             ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing, source: self.source)
         }
         .sheet(isPresented: $isContactsPickerShowing) {
-            //
+            if let participant = participants.first {
+                chatViewModel.getChatFor(contact: participant)
+            }
         } content: {
             ContactsPicker(isContactsPickerShowing: $isContactsPickerShowing,
                            selectedContacts: $participants)
