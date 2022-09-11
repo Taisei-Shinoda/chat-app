@@ -62,9 +62,27 @@ struct ConversationView: View {
                             // 連絡先の名前
                             if participants.count > 0 {
                                 let participant = participants.first
-                                Text("\(participant?.firstname ?? "") \(participant?.lastname ?? "")")
-                                    .font(.chatHeading)
-                                    .foregroundColor(Color("text-header"))
+                                
+                                Group {
+                                    if participants.count == 1 {
+                                        Text("\(participant?.firstname ?? "") \(participant?.lastname ?? "")")
+                                    }
+                                    else if participants.count == 2 {
+                                        
+                                        let participant2 = participants[1]
+                                        
+                                        Text("\(participant?.firstname ?? ""), \(participant2.firstname ?? "")")
+                                            
+                                    }
+                                    else if participants.count > 2 {
+                                        
+                                        let participant2 = participants[1]
+                                        
+                                        Text("\(participant?.firstname ?? ""), \(participant2.firstname ?? "") + \(participants.count - 2) others")
+                                    }
+                                }
+                                .font(.chatHeading)
+                                .foregroundColor(Color("text-header"))
                             }
                             else {
                                 Text("Recipient")
@@ -75,9 +93,12 @@ struct ConversationView: View {
                         Spacer()
                         
                         // 連絡先のサムネイル画像
-                        if participants.count > 0 {
+                        if participants.count == 1 {
                             let participant = participants.first
                             ProfilePicView(user: participant!)
+                        }
+                        else if participants.count > 1 {
+                            GroupProfilePicView(users: participants)
                         }
                         else {
                             // 新しいメッセージを開始
@@ -265,9 +286,9 @@ struct ConversationView: View {
             ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing, source: self.source)
         }
         .sheet(isPresented: $isContactsPickerShowing) {
-            if let participant = participants.first {
-                chatViewModel.getChatFor(contact: participant)
-            }
+            
+            chatViewModel.getChatFor(contacts: participants)
+            
         } content: {
             ContactsPicker(isContactsPickerShowing: $isContactsPickerShowing,
                            selectedContacts: $participants)

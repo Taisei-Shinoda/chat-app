@@ -37,11 +37,18 @@ struct ContactsPicker: View {
                                 
                                 Button {
                                     if isSelectedContact {
-                                        selectedContacts.removeAll()
+                                       let index = selectedContacts.firstIndex(of: user)
+                                        if let index = index {
+                                            selectedContacts.remove(at: index)
+                                        }
                                     }
                                     else {
-                                        selectedContacts.removeAll()
+                                        if selectedContacts.count < 3 {
                                         selectedContacts.append(user)
+                                    }
+                                        else {
+                                            // TODO: 制限に達したことを示すメッセージ
+                                        }
                                     }
                                     
                                 } label: {

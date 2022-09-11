@@ -34,12 +34,17 @@ class ChatViewModel: ObservableObject {
         }
     }
     
-    func getChatFor(contact: User) {
-        guard contact.id != nil else {
-            return
+    func getChatFor(contacts: [User]) {
+        
+        for contact in contacts {
+            if contact.id == nil { return }
         }
+        
+        let setOfContactIds = Set(arrayLiteral: contacts.map{ u in u.id! })
+        
         let foundChat = chats.filter { chat in
-            return chat.numparticipants == 2 && chat.participantids.contains(contact.id!)
+            let setOfParticipantIds = Set(arrayLiteral: chat.participantids)
+            return chat.numparticipants == contacts.count + 1 && setOfContactIds.isSubset(of: setOfContactIds)
         }
         
         if !foundChat.isEmpty {
@@ -48,14 +53,21 @@ class ChatViewModel: ObservableObject {
             getMessages()
             
         } else {
-            var newChat = Chat(id: nil, numparticipants: 2, participantids: [AuthViewModel.getLoggedInUserId(), contact.id!],
+            
+            var allParticipantIds = contacts.map { u in u.id! }
+            allParticipantIds.append(AuthViewModel.getLoggedInUserId())
+            
+            let newChat = Chat(id: nil,
+                               numparticipants: allParticipantIds.count,
+                               participantids: allParticipantIds,
                                lastmsg: nil, updated: nil, msgs: nil)
             
             self.selectedChat = newChat
             
             databaseService.createChat(chat: newChat) { docId in
-                self.selectedChat = Chat(id: docId, numparticipants: 2,
-                                         participantids: [AuthViewModel.getLoggedInUserId(), contact.id!],
+                self.selectedChat = Chat(id: docId,
+                                         numparticipants: allParticipantIds.count,
+                                         participantids: allParticipantIds,
                                          lastmsg: nil, updated: nil, msgs: nil)
                 self.chats.append(self.selectedChat!)
             }

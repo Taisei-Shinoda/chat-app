@@ -55,7 +55,7 @@ struct ContactsListView: View {
                     
                     Button {
                         // TODO: チャットリスト
-                        chatViewModel.getChatFor(contact: user)
+                        chatViewModel.getChatFor(contacts: [user])
                         isChatShowing = true
                         
                     } label: {
