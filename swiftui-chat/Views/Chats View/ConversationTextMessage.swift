@@ -11,16 +11,26 @@ struct ConversationTextMessage: View {
     
     var msg: String
     var isFromUser: Bool
+    var name: String?
     
     var body: some View {
         
+        VStack(alignment: .leading, spacing: 4) {
+            
+            if let name = name {
+                Text(name)
+                    .font(.chatName)
+                    .foregroundColor(Color("bubble-primary"))
+            }
+            
             Text(msg)
                 .font(.bodyParagraph)
                 .foregroundColor(isFromUser ? Color("text-button") : Color("text-primary"))
-                .padding(.vertical, 16)
-                .padding(.horizontal, 24)
-                .background(isFromUser ? Color("bubble-primary") : Color("bubble-secondary"))
-                .cornerRadius(30, corners: isFromUser ? [.topLeft, .topRight, .bottomLeft] : [.topLeft, .topRight, .bottomRight])
+        }
+        .padding(.vertical, 16)
+        .padding(.horizontal, 24)
+        .background(isFromUser ? Color("bubble-primary") : Color("bubble-secondary"))
+        .cornerRadius(30, corners: isFromUser ? [.topLeft, .topRight, .bottomLeft] : [.topLeft, .topRight, .bottomRight])
         
     }
 }

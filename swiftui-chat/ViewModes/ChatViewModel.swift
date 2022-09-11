@@ -40,11 +40,11 @@ class ChatViewModel: ObservableObject {
             if contact.id == nil { return }
         }
         
-        let setOfContactIds = Set(arrayLiteral: contacts.map{ u in u.id! })
+        let setOfContactIds = Set(contacts.map{ u in u.id! })
         
         let foundChat = chats.filter { chat in
-            let setOfParticipantIds = Set(arrayLiteral: chat.participantids)
-            return chat.numparticipants == contacts.count + 1 && setOfContactIds.isSubset(of: setOfContactIds)
+            let setOfParticipantIds = Set(chat.participantids)
+            return chat.numparticipants == contacts.count + 1 && setOfContactIds.isSubset(of: setOfParticipantIds)
         }
         
         if !foundChat.isEmpty {

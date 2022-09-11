@@ -41,4 +41,8 @@ extension Font {
     public static var chatHeading: Font {
         return Font.custom("LexendDeca-SemiBold", size: 19)
     }
+    
+    public static var chatName: Font {
+        return Font.custom("LexendDeca-SemiBold", size: 12)
+    }
 }
