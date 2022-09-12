@@ -35,7 +35,7 @@ struct ConversationView: View {
                 
                 //TODO: チャットヘッダー
                 ZStack {
-                    Color(.white)
+                    Color("view-header-background")
                         .ignoresSafeArea()
                     
                     HStack {

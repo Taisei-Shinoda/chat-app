@@ -12,6 +12,8 @@
 		C60AE64528CC813800CF7132 /* ContactsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64428CC813800CF7132 /* ContactsPicker.swift */; };
 		C60AE64728CD826C00CF7132 /* GroupProfilePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64628CD826C00CF7132 /* GroupProfilePicView.swift */; };
 		C60AE64A28CEAD1800CF7132 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64928CEAD1800CF7132 /* SettingsView.swift */; };
+		C60AE64C28CF24B800CF7132 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64B28CF24B800CF7132 /* SettingsViewModel.swift */; };
+		C60AE64E28CF254B00CF7132 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64D28CF254B00CF7132 /* Constans.swift */; };
 		C621740A28B5FD8400AF967E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740928B5FD8400AF967E /* WelcomeView.swift */; };
 		C621740C28B5FD9200AF967E /* PhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740B28B5FD9200AF967E /* PhoneNumberView.swift */; };
 		C621740E28B5FDA700AF967E /* VerificationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740D28B5FDA700AF967E /* VerificationVIew.swift */; };
@@ -61,6 +63,8 @@
 		C60AE64428CC813800CF7132 /* ContactsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPicker.swift; sourceTree = "<group>"; };
 		C60AE64628CD826C00CF7132 /* GroupProfilePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupProfilePicView.swift; sourceTree = "<group>"; };
 		C60AE64928CEAD1800CF7132 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C60AE64B28CF24B800CF7132 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		C60AE64D28CF254B00CF7132 /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
 		C621740928B5FD8400AF967E /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C621740B28B5FD9200AF967E /* PhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberView.swift; sourceTree = "<group>"; };
 		C621740D28B5FDA700AF967E /* VerificationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationVIew.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 				C6B537BE28B3B80600C0FDCF /* AuthViewModel.swift */,
 				C6CF170028B6F08B001C23A7 /* ContactsViewModel.swift */,
 				C65A854028BF9AEF00088AF3 /* ChatViewModel.swift */,
+				C60AE64B28CF24B800CF7132 /* SettingsViewModel.swift */,
 			);
 			path = ViewModes;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				C6CF170628B7AA9F001C23A7 /* TextHelper.swift */,
 				C65A853C28BF502B00088AF3 /* RoundedCornerExtension.swift */,
 				C6AAFCBC28C09DA200584B66 /* DateHelper.swift */,
+				C60AE64D28CF254B00CF7132 /* Constans.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -380,11 +386,13 @@
 				C6AAFCBD28C09DA200584B66 /* DateHelper.swift in Sources */,
 				C621741228B5FDDE00AF967E /* SyncContactsView.swift in Sources */,
 				C6B537BC28B376B300C0FDCF /* AppDelegate.swift in Sources */,
+				C60AE64E28CF254B00CF7132 /* Constans.swift in Sources */,
 				C6CF170728B7AA9F001C23A7 /* TextHelper.swift in Sources */,
 				C6B537AD28B360DA00C0FDCF /* CustomTabBar.swift in Sources */,
 				C6B5379028B10CA100C0FDCF /* RootView.swift in Sources */,
 				C6B537BF28B3B80600C0FDCF /* AuthViewModel.swift in Sources */,
 				C65A853428BCA63200088AF3 /* ChatsListView.swift in Sources */,
+				C60AE64C28CF24B800CF7132 /* SettingsViewModel.swift in Sources */,
 				C621740A28B5FD8400AF967E /* WelcomeView.swift in Sources */,
 				C6AAFCC128C35E1400584B66 /* CacheService.swift in Sources */,
 				C6B537AA28B117BA00C0FDCF /* Fonts.swift in Sources */,
