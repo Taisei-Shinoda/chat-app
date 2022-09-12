@@ -14,6 +14,8 @@ struct ChatsListView: View {
     
     @Binding var isChatShowing: Bool
     
+    @Binding var isSettingsShowing: Bool
+    
     var body: some View {
         VStack {
             HStack {
@@ -21,8 +23,8 @@ struct ChatsListView: View {
                     .font(.pageTitle)
                 Spacer()
                 Button {
-                    //TODO: 設定
-                    
+                    // 設定
+                    isSettingsShowing = true
                 } label: {
                     Image(systemName: "gearshape.fill")
                         .resizable()
@@ -70,6 +72,6 @@ struct ChatsListView: View {
 
 struct ChatsListView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatsListView(isChatShowing: .constant(false))
+        ChatsListView(isChatShowing: .constant(false), isSettingsShowing: .constant(false))
     }
 }

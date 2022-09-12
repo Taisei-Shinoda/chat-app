@@ -10,6 +10,9 @@ import Combine
 
 struct VerificationView: View {
     
+    @EnvironmentObject var contactsViewModel: ContactsViewModel
+    @EnvironmentObject var chatViewModel: ChatViewModel
+    
     @Binding var currentStep: OnboardingStep
     @Binding var isOnboarding: Bool
     
@@ -64,6 +67,11 @@ struct VerificationView: View {
                         DatabaseService().checkUserProfile { exists in
                             if exists {
                                 isOnboarding = false
+                                
+                                // ログアウトした後の、コンテンツのロード
+                                contactsViewModel.getLocalContacts()
+                                chatViewModel.getChats()
+                                
                             } else {
                                 currentStep = .profile
                             }

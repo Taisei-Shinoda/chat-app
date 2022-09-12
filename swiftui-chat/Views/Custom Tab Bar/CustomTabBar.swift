@@ -42,8 +42,6 @@ struct CustomTabBar: View {
                 
                 isChatShowing = true
                 
-//                 TODO: ログアウト
-//                AuthViewModel.logout()
             } label: {
                 
                 VStack (alignment: .center, spacing: 4) {

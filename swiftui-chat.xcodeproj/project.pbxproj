@@ -11,6 +11,7 @@
 		C60AE64328CC392000CF7132 /* ConversationPhotoMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64228CC392000CF7132 /* ConversationPhotoMessage.swift */; };
 		C60AE64528CC813800CF7132 /* ContactsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64428CC813800CF7132 /* ContactsPicker.swift */; };
 		C60AE64728CD826C00CF7132 /* GroupProfilePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64628CD826C00CF7132 /* GroupProfilePicView.swift */; };
+		C60AE64A28CEAD1800CF7132 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60AE64928CEAD1800CF7132 /* SettingsView.swift */; };
 		C621740A28B5FD8400AF967E /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740928B5FD8400AF967E /* WelcomeView.swift */; };
 		C621740C28B5FD9200AF967E /* PhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740B28B5FD9200AF967E /* PhoneNumberView.swift */; };
 		C621740E28B5FDA700AF967E /* VerificationVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = C621740D28B5FDA700AF967E /* VerificationVIew.swift */; };
@@ -59,6 +60,7 @@
 		C60AE64228CC392000CF7132 /* ConversationPhotoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationPhotoMessage.swift; sourceTree = "<group>"; };
 		C60AE64428CC813800CF7132 /* ContactsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsPicker.swift; sourceTree = "<group>"; };
 		C60AE64628CD826C00CF7132 /* GroupProfilePicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupProfilePicView.swift; sourceTree = "<group>"; };
+		C60AE64928CEAD1800CF7132 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C621740928B5FD8400AF967E /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		C621740B28B5FD9200AF967E /* PhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberView.swift; sourceTree = "<group>"; };
 		C621740D28B5FDA700AF967E /* VerificationVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationVIew.swift; sourceTree = "<group>"; };
@@ -116,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C60AE64828CEAD0700CF7132 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				C60AE64928CEAD1800CF7132 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		C65A852F28BCA5D700088AF3 /* Chats View */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 				C65A852F28BCA5D700088AF3 /* Chats View */,
 				C65A853028BCA5ED00088AF3 /* Contacts View */,
 				C65A853928BF3D3E00088AF3 /* Misc */,
+				C60AE64828CEAD0700CF7132 /* Settings */,
 				C6B537AB28B360BA00C0FDCF /* Custom Tab Bar */,
 			);
 			path = Views;
@@ -382,6 +393,7 @@
 				C6CF170328B6F908001C23A7 /* User.swift in Sources */,
 				C621740C28B5FD9200AF967E /* PhoneNumberView.swift in Sources */,
 				C6B537AF28B3695C00C0FDCF /* TabBarButton.swift in Sources */,
+				C60AE64A28CEAD1800CF7132 /* SettingsView.swift in Sources */,
 				C621740E28B5FDA700AF967E /* VerificationVIew.swift in Sources */,
 				C6AAFCBF28C2EA8100584B66 /* ChatsListRow.swift in Sources */,
 				C60AE64128CC373000CF7132 /* ConversationTextMessage.swift in Sources */,
