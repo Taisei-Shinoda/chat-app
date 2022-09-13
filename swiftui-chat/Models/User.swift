@@ -20,5 +20,6 @@ struct User: Codable, Identifiable, Hashable {
     
     var photo: String?
     
+    var isactive: Bool = true
 }
 

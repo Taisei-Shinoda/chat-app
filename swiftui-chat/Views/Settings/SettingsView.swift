@@ -60,6 +60,10 @@ struct SettingsView: View {
                     
                     Button {
                        // TODO: "DELETE ACOUNT" BUTTON
+                        settingsViewModel.deactivateAccount {
+                            AuthViewModel.logout()
+                            isOnboarding = true
+                        }
                     } label: {
                         Text("DELETE ACOUNT")
                     }
