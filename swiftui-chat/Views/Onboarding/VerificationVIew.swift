@@ -18,6 +18,8 @@ struct VerificationView: View {
     
     @State var verificationCode = ""
     
+    @State var isButtonDisabled = false
+    
     var body: some View {
         
         VStack {
@@ -62,7 +64,10 @@ struct VerificationView: View {
             Spacer()
             
             Button {
+                isButtonDisabled = true
+                
                 AuthViewModel.verifyCode(code: verificationCode) { error in
+                    
                     if error == nil {
                         DatabaseService().checkUserProfile { exists in
                             if exists {
@@ -76,16 +81,25 @@ struct VerificationView: View {
                                 currentStep = .profile
                             }
                         }
-                    } else {
+                    }
+                    else {
                         // TODO: エラーメッセージを表示
                         
                     }
+                    isButtonDisabled = false
                 }
             } label: {
-                Text("Next")
+                HStack {
+                    Text("Next")
+                    if isButtonDisabled {
+                        ProgressView()
+                            .padding(.leading, 2)
+                    }
+                }
             }
             .buttonStyle(OnboardingButtonStyle())
             .padding(.bottom, 87)
+            .disabled(isButtonDisabled)
         }
         .padding(.horizontal)
     }

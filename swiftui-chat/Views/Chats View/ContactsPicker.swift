@@ -25,44 +25,45 @@ struct ContactsPicker: View {
                 ScrollView {
                     ForEach(contactsViewModel.filterdUsers) { user in
                         
-                        let isSelectedContact = selectedContacts.contains { u in
-                            u.id == user.id
-                        }
-                        
-                        ZStack {
-                            ContanctRow(user: user)
+                        if user.isactive {
+                            let isSelectedContact = selectedContacts.contains { u in
+                                u.id == user.id
+                            }
                             
-                            HStack {
-                                Spacer()
+                            ZStack {
+                                ContanctRow(user: user)
                                 
-                                Button {
-                                    if isSelectedContact {
-                                       let index = selectedContacts.firstIndex(of: user)
-                                        if let index = index {
-                                            selectedContacts.remove(at: index)
+                                HStack {
+                                    Spacer()
+                                    
+                                    Button {
+                                        if isSelectedContact {
+                                           let index = selectedContacts.firstIndex(of: user)
+                                            if let index = index {
+                                                selectedContacts.remove(at: index)
+                                            }
                                         }
-                                    }
-                                    else {
-                                        if selectedContacts.count < 3 {
-                                        selectedContacts.append(user)
-                                    }
                                         else {
-                                            // TODO: 制限に達したことを示すメッセージ
+                                            if selectedContacts.count < 3 {
+                                            selectedContacts.append(user)
                                         }
+                                            else {
+                                                // TODO: 制限に達したことを示すメッセージ
+                                            }
+                                        }
+                                        
+                                    } label: {
+                                        Image(systemName: isSelectedContact ? "checkmark.circle.fill" : "checkmark.circle")
+                                            .resizable()
+                                            .foregroundColor(Color("button-primary"))
+                                            .frame(width: 25, height: 25)
                                     }
                                     
-                                } label: {
-                                    Image(systemName: isSelectedContact ? "checkmark.circle.fill" : "checkmark.circle")
-                                        .resizable()
-                                        .foregroundColor(Color("button-primary"))
-                                        .frame(width: 25, height: 25)
                                 }
-                                
                             }
+                            .padding(.top, 18)
+                            .padding(.horizontal)
                         }
-                        .padding(.top, 18)
-                        .padding(.horizontal)
-                        
                     }
                 }
                 

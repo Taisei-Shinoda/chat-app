@@ -14,6 +14,8 @@ struct PhoneNumberView: View {
     @Binding var currentStep: OnboardingStep
     @State var phoneNumber = ""
     
+    @State var isButtonDisabled = false
+    
     var body: some View {
         
         VStack {
@@ -58,21 +60,32 @@ struct PhoneNumberView: View {
             Spacer()
             
             Button {
+                
+                isButtonDisabled = true
+                
                 //TODO: Firebase へ電話認証を依頼
                 AuthViewModel.sendPhoneNumber(phone: phoneNumber) { error in
                     if error == nil {
                         currentStep = .verification
                     } else {
-                        
+                        // TODO: エラーを見せる
                     }
+                    isButtonDisabled = false
                 }
                 
                 
             } label: {
-                Text("Next")
+                HStack {
+                    Text("Next")
+                    if isButtonDisabled {
+                        ProgressView()
+                            .padding(.leading, 2)
+                    }
+                }
             }
             .buttonStyle(OnboardingButtonStyle())
             .padding(.bottom, 87)
+            .disabled(isButtonDisabled)
         }
         .padding(.horizontal)
     }
