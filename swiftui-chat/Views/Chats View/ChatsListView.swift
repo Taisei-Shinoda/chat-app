@@ -39,16 +39,25 @@ struct ChatsListView: View {
             if chatViewModel.chats.count > 0 {
                 List(chatViewModel.chats) { chat in
                     
-                    Button {
-                        chatViewModel.selectedChat = chat
-                        isChatShowing = true
-                    } label: {
-                        ChatsListRow(chat: chat,
-                                     otherParticipants: contactsViewModel.getParticipants(ids: chat.participantids))
+                    let otherParticipants = contactsViewModel.getParticipants(ids: chat.participantids)
+                    
+                    if let otherParticipant = otherParticipants.first, chat.numparticipants == 2, !otherParticipant.isactive {
+                        
+                        // 削除されたアカウントとの会話は表示させません
+                        
                     }
-                    .buttonStyle(.plain)
-                    .listRowBackground(Color(.clear))
-                    .listRowSeparator(.hidden)
+                    else {
+                        Button {
+                            chatViewModel.selectedChat = chat
+                            isChatShowing = true
+                        } label: {
+                            ChatsListRow(chat: chat,
+                                         otherParticipants: otherParticipants)
+                        }
+                        .buttonStyle(.plain)
+                        .listRowBackground(Color(.clear))
+                        .listRowSeparator(.hidden)
+                    }
                 }
                 .listStyle(.plain)
             }

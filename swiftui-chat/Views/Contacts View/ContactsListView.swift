@@ -55,18 +55,21 @@ struct ContactsListView: View {
             if contactsViewModel.filterdUsers.count > 0 {
                 List(contactsViewModel.filterdUsers) { user in
                     
-                    Button {
-                        // TODO: チャットリスト
-                        chatViewModel.getChatFor(contacts: [user])
-                        isChatShowing = true
+                    if user.isactive {
                         
-                    } label: {
-                        //TODO: ボタンの行
-                        ContanctRow(user: user)
+                        Button {
+                            // TODO: チャットリスト
+                            chatViewModel.getChatFor(contacts: [user])
+                            isChatShowing = true
+                            
+                        } label: {
+                            //TODO: ボタンの行
+                            ContanctRow(user: user)
+                        }
+                        .buttonStyle(.plain)
+                        .listRowBackground(Color(.clear))
+                        .listRowSeparator(.hidden)
                     }
-                    .buttonStyle(.plain)
-                    .listRowBackground(Color(.clear))
-                    .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
                 .padding(.top, 12)

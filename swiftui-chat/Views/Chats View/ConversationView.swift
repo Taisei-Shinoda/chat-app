@@ -147,23 +147,23 @@ struct ConversationView: View {
                                         }
                                     }
                                     
-                                    
+                                    let userOfMsg = participants.filter { p in p.id == msg.senderid }.first
                                     
                                     if msg.imageurl != "" {
                                         // 画像メッセージ
-                                        ConversationPhotoMessage(imageUrl: msg.imageurl!, isFromUser: isFromUser)
+                                        ConversationPhotoMessage(imageUrl: msg.imageurl!,
+                                                                 isFromUser: isFromUser,
+                                                                 isActive: userOfMsg?.isactive ?? true)
                                     }
                                     else {
                                         // テキストメッセージ
-                                        
                                         if participants.count > 1 && !isFromUser {
-                                            let userOfMsg = participants.filter { p in p.id == msg.senderid }.first
                                             ConversationTextMessage(msg: msg.msg,
                                                                     isFromUser: isFromUser,
-                                                                    name: "\(userOfMsg?.firstname ?? "") \(userOfMsg?.lastname ?? "")")
+                                                                    name: "\(userOfMsg?.firstname ?? "") \(userOfMsg?.lastname ?? "")",
+                                                                    isActive: userOfMsg?.isactive ?? true)
                                         }
                                         else {
-                                            
                                             ConversationTextMessage(msg: msg.msg, isFromUser: isFromUser)
                                         }
                                     }
