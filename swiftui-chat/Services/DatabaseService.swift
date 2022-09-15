@@ -73,6 +73,7 @@ class DatabaseService {
         let doc = db.collection("users").document(AuthViewModel.getLoggedInUserId())
         doc.setData(["frstname": firstName,
                      "lasname": lastName,
+                     "isactive": true,
                      "phone": userPhone])
         
         // 画像のチェック
@@ -158,7 +159,7 @@ class DatabaseService {
                 }
                 completion(chats)
             } else {
-                print("データベースの検索でエラーが発生しました")
+                print("データベースの検索でエラーが発生しましたよ！")
             }
         }
         

@@ -235,6 +235,11 @@ struct ConversationView: View {
                             TextField("Aa", text: $chatMessage)
                                 .foregroundColor(Color("text-input"))
                                 .font(.bodyParagraph )
+                                .placeholder(when: chatMessage.isEmpty) {
+                                    Text("Aa")
+                                        .foregroundColor(Color("text-textfield"))
+                                        .font(.bodyParagraph)
+                                }
                                 .padding(10)
                         }
                     }

@@ -45,6 +45,11 @@ struct ContactsListView: View {
                 TextField("Search contact or number", text: $filterText)
                     .font(.tabBar)
                     .foregroundColor(Color("text-textfield"))
+                    .placeholder(when: filterText.isEmpty) {
+                        Text("Search contact or number")
+                            .foregroundColor(Color("text-textfield"))
+                            .font(.bodyParagraph)
+                    }
                     .padding()
             }
             .frame(height: 46)

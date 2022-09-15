@@ -18,6 +18,7 @@ struct CreateProfileTextfieldStyle: TextFieldStyle {
                 .frame(height: 46)
             
             configuration
+                .foregroundColor(Color("text-textfield"))
                 .font(.tabBar)
                 .padding()
         }

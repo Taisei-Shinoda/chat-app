@@ -20,6 +20,8 @@ struct VerificationView: View {
     
     @State var isButtonDisabled = false
     
+    @State var isErrorLabelVisible = false
+    
     var body: some View {
         
         VStack {
@@ -40,6 +42,7 @@ struct VerificationView: View {
                 
                 HStack {
                     TextField("", text: $verificationCode)
+                        .foregroundColor(Color("text-textfield"))
                         .font(.bodyParagraph)
                         .keyboardType(.numberPad)
                         .onReceive(Just(verificationCode)) { _ in
@@ -61,9 +64,21 @@ struct VerificationView: View {
             }
             .padding(.top, 34)
             
+            // エラーラベル
+            Text("Invalid varification code.")
+                .foregroundColor(.red)
+                .font(.smallText)
+                .padding(.top, 20)
+                .opacity(isErrorLabelVisible ? 1 : 0)
+            
+            
+            
             Spacer()
             
             Button {
+                
+                isErrorLabelVisible = true
+                
                 isButtonDisabled = true
                 
                 AuthViewModel.verifyCode(code: verificationCode) { error in
@@ -84,7 +99,7 @@ struct VerificationView: View {
                     }
                     else {
                         // TODO: エラーメッセージを表示
-                        
+                        isErrorLabelVisible = true
                     }
                     isButtonDisabled = false
                 }

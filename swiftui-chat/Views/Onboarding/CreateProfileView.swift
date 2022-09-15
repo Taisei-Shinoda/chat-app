@@ -21,6 +21,10 @@ struct CreateProfileView: View {
     
     @State var isSaveButtonDisabled = false
     
+    @State var isErrorLabelVisible = false
+    @State var errorMessage = ""
+    
+    
     var body: some View {
         
         VStack {
@@ -62,13 +66,43 @@ struct CreateProfileView: View {
             
             TextField("Given Name", text: $firstName)
                 .textFieldStyle(CreateProfileTextfieldStyle())
+                .placeholder(when: firstName.isEmpty) {
+                    Text("Given Name")
+                        .foregroundColor(Color("text-textfield"))
+                        .font(.bodyParagraph)
+                }
             
             TextField("Last Name", text: $lastName)
                 .textFieldStyle(CreateProfileTextfieldStyle())
+                .placeholder(when: lastName.isEmpty) {
+                    Text("Last Name")
+                        .foregroundColor(Color("text-textfield"))
+                        .font(.bodyParagraph)
+                }
+            
+            // エラーラベル
+            Text(errorMessage)
+                .foregroundColor(.red)
+                .font(.smallText)
+                .padding(.top, 20)
+                .opacity(isErrorLabelVisible ? 1 : 0)
+            
             
             Spacer()
             
             Button {
+                
+                isErrorLabelVisible = false
+                
+                guard !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                        !lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                    
+                    errorMessage = "有効な名字と名前を入力してください"
+                    isErrorLabelVisible = true
+                    return
+                    
+                }
+                
                 isSaveButtonDisabled = true
                 //TODO: データのセーブ
                 DatabaseService().setUserProfile(firstName: firstName,
@@ -79,7 +113,8 @@ struct CreateProfileView: View {
                         currentStep = .contacts
                     } else {
                         // TODO: ユーザーにエラーメッセージを見せます
-                        
+                        errorMessage = "エラーが発生しました。もう一度試してください。"
+                        isErrorLabelVisible = true
                     }
                     isSaveButtonDisabled = false
                 })
