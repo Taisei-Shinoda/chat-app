@@ -26,11 +26,11 @@ struct VerificationView: View {
         
         VStack {
             
-            Text("Verification")
+            Text("検証")
                 .font(.titleText)
                 .padding(.top, 52)
             
-            Text("We sent a 6-digit verification code to your device.")
+            Text("デバイスに6桁の認証コードを送信しました")
                 .font(.bodyParagraph)
                 .padding(.top, 12)
             
@@ -65,7 +65,7 @@ struct VerificationView: View {
             .padding(.top, 34)
             
             // エラーラベル
-            Text("Invalid varification code.")
+            Text("無効な検証コード")
                 .foregroundColor(.red)
                 .font(.smallText)
                 .padding(.top, 20)

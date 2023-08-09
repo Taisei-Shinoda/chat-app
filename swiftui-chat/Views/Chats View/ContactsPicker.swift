@@ -48,7 +48,6 @@ struct ContactsPicker: View {
                                             selectedContacts.append(user)
                                         }
                                             else {
-                                                // TODO: 制限に達したことを示すメッセージ
                                             }
                                         }
                                         

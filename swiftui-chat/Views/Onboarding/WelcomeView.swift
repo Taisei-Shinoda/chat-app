@@ -22,7 +22,7 @@ struct WelcomeView: View {
                 .font(.titleText)
                 .padding(.top, 32)
             
-            Text("Simple and fuss-free chat experience")
+            Text("シンプルなチャット体験")
                 .font(.bodyParagraph)
                 .padding(.top, 8)
             
@@ -31,11 +31,11 @@ struct WelcomeView: View {
             Button {
                 currentStep = .phonenumber
             } label: {
-                Text("Get Started")
+                Text("始めましょう")
             }
             .buttonStyle(OnboardingButtonStyle())
             
-            Text("By tapping ‘Continue’, you agree to our Privacy Policy.")
+            Text("「続行」をタップすると、プライバシーポリシーに同意したことになります。")
                 .font(.smallText)
                 .padding(.top, 14)
                 .padding(.bottom, 61)

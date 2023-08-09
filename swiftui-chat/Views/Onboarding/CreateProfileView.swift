@@ -28,19 +28,17 @@ struct CreateProfileView: View {
     var body: some View {
         
         VStack {
-            Text("Setup your Profile")
+            Text("プロフィールを編集")
                 .font(.titleText)
                 .padding(.top, 52)
             
-            Text("Just a few more details to get started.")
+            Text("詳細")
                 .font(.bodyParagraph)
                 .padding(.top, 12)
             
             Spacer()
             
-            //TODO: profile image buttton
             Button {
-                // show action
                 isSourceMenuShowing = true
             } label: {
                 ZStack {
@@ -136,14 +134,14 @@ struct CreateProfileView: View {
                 Text("Photo Library")
             }
             
-            /// シミュレーターにはカメラ機能がないので、クラッシュ防止のためこのメソッドを書きました。
+            /// シミュレーターにはカメラ機能がないので、クラッシュ防止のためこのメソッドを書きました
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 Button {
                     // Set the SOORCE
                     self.source = .camera
                     isPickerShowing = true
                 } label: {
-                    Text("Take Photo")
+                    Text("写真を使用")
                 }
             }
         })

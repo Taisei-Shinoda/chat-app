@@ -23,7 +23,6 @@ struct ProfilePicView: View {
                 }
             }
             else {
-                
                 if let cachedImage = CacheService.getImage(forkey: user.photo!) {
                     cachedImage
                         .resizable()

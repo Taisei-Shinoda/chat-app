@@ -22,11 +22,11 @@ struct PhoneNumberView: View {
         
         VStack {
             
-            Text("Verification")
+            Text("検証")
                 .font(.titleText)
                 .padding(.top, 52)
             
-            Text("Enter your mobile number below. We’ll send you a verification code after.")
+            Text("携帯電話番号を入力してください。確認コードをお送りします。")
                 .font(.bodyParagraph)
                 .padding(.top, 12)
             
@@ -66,7 +66,7 @@ struct PhoneNumberView: View {
             .padding(.top, 34)
             
             // エラーラベル
-            Text("Please enter a valid phone number.")
+            Text("有効な電話番号を入力してください")
                 .foregroundColor(.red)
                 .font(.smallText)
                 .padding(.top, 20)

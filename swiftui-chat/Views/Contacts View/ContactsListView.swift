@@ -42,11 +42,11 @@ struct ContactsListView: View {
                     .foregroundColor(.white)
                     .cornerRadius(20)
                 
-                TextField("Search contact or number", text: $filterText)
+                TextField("連絡先を探す", text: $filterText)
                     .font(.tabBar)
                     .foregroundColor(Color("text-textfield"))
                     .placeholder(when: filterText.isEmpty) {
-                        Text("Search contact or number")
+                        Text("電話番号を探す")
                             .foregroundColor(Color("text-textfield"))
                             .font(.bodyParagraph)
                     }
@@ -83,11 +83,11 @@ struct ContactsListView: View {
                 Spacer()
                 
                 Image("no-contacts-yet")
-                Text("No chats yet")
+                Text("まだチャットはしてないよ")
                     .font(.titleText)
                     .padding(.top, 32)
                 
-                Text("Add some contacts to get started")
+                Text("連絡先を追加して始める")
                     .font(.bodyParagraph)
                     .padding(.top, 8)
                 

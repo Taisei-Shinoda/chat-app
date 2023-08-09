@@ -112,7 +112,7 @@ class ChatViewModel: ObservableObject {
     }
     
     
-    // MARK: - Helper Methods
+    // MARK: - ヘルパーメソッド
     
     func getParticipantIds() -> [String] {
         

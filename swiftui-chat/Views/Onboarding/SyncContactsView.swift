@@ -18,11 +18,11 @@ struct SyncContactsView: View {
             Spacer()
             
             Image("onboarding-all-set")
-            Text("Awesome!")
+            Text("素晴らしい！")
                 .font(.titleText)
                 .padding(.top, 32)
             
-            Text("Continue to start chatting with your friends.")
+            Text("チャットを続ける")
                 .font(.bodyParagraph)
                 .padding(.top, 8)
             
@@ -31,7 +31,7 @@ struct SyncContactsView: View {
             Button {
                 isOnbording = false
             } label: {
-                Text("Continue")
+                Text("続ける")
             }
             .buttonStyle(OnboardingButtonStyle())
             .padding(.bottom, 87)
